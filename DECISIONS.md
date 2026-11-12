@@ -221,3 +221,11 @@ Entries tagged *Assumption* must also appear in the README.
   selected). App name: "Star Wars Films".
 - Consequences: any new colour pair must be checked the same way before use.
 
+
+**D-030 — Cast loads all-or-nothing** · Accepted
+- Context: the brief requires "the whole casting of the film"; one failed
+  character request currently fails the list.
+- Decision: keep `Promise.all`. Never render a partial cast. Retry
+  re-fetches only the failed requests because successful ones stay cached
+  (`fetchJson` caches each promise and evicts only failed entries).
+- Consequences: simplest code; a transient failure costs one retry click.

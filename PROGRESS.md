@@ -213,6 +213,9 @@ Ideas and findings outside the current task. Not committed scope.
 
 Newest first. One or two lines per session: what was done, what is next.
 
+- 2026-11-12 — Owner decided the cast stays all-or-nothing (D-030; the
+  owner's draft was numbered D-028, renumbered because D-028/D-029 exist).
+
 - 2026-11-12 — T3: `ui/Spinner`, `ui/ErrorMessage`, `FilmList` (links,
   `aria-current`, bar + bold selection cue, log button per row), main-zone
   heading and "Film not found", "Showing …" announcement derived from the
