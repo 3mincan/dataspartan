@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T2 — App shell and base styles (owner browser check left)
-- **Next up:** T3 — Film list
+- **In progress:** T3 — Film list
+- **Next up:** T4 — Film details and cast
 - **Blocked:** —
 
 ## Tasks
@@ -52,8 +52,7 @@ Guides: `html`, `css-layout`, `responsive-design`, `size-aware-styling`, `dark-m
       every text pair ≥ 4.5:1 and every UI/focus pair ≥ 3:1 in both schemes
 - [x] Base styles: `:focus-visible` outline, minimum 24×24 px targets, `rem`-based sizes
 - [x] Shell: Grid, `100dvh`, labelled `<nav>` + single `<main>`, independent scrolling
-- [~] Stack side nav above main below ~720px; no horizontal scroll at 320 CSS px
-      (CSS in place; owner to check at 320 px and 400% zoom)
+- [x] Stack side nav above main below ~720px; no horizontal scroll at 320 CSS px
 - [x] Empty main zone prompt when no film is selected
 - [x] `App` reads the view from `useUrlState()`; no selection state in React (D-023)
 - [x] `document.title` follows the view
@@ -212,6 +211,10 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner checked T2 in the browser: nav stacks below 720px,
+  no horizontal scroll at 320 px / 400% zoom, light scheme readable.
+  T2 done. Next: T3.
 
 - 2026-11-12 — T2: shell, tokens (D-029), skip link, Announcer, `pageTitle`;
   tests for `utils/url`, `useUrlState` (incl. Back/Forward and both
