@@ -1,15 +1,29 @@
-.sectionHeading {
-  margin-block: var(--space-5) var(--space-3);
-  font-size: 1.25rem;
+.title {
+  margin-block: 0 var(--space-6);
+  font-size: var(--text-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
+.number {
+  color: var(--color-accent);
+}
+
+.sectionHeading {
+  margin-block: 0 var(--space-3);
+}
+
+/* The black stage with yellow text, in both colour schemes (D-033). */
 .crawl {
   max-inline-size: 40rem;
-  margin-inline: auto;
-  padding: var(--space-4);
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius);
-  background-color: var(--color-surface);
+  margin-block: 0 var(--space-6);
+  padding: var(--space-5);
+  color: var(--color-stage-text);
+  background-color: var(--color-stage);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
   text-align: center;
   white-space: pre-line;
 }
@@ -23,13 +37,14 @@
 /* Stacked by default; side by side when there is room. */
 .castLayout {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-6);
 }
 
 @container cast (inline-size > 36rem) {
   .castLayout {
-    grid-template-columns: 14rem minmax(0, 1fr);
+    grid-template-columns: 13rem minmax(0, 1fr);
     align-items: start;
+    gap: var(--space-7);
   }
 
   /* Keeps the details in view while scrolling a long cast list. It sits in

@@ -1,16 +1,23 @@
+/* A thick start bar plus text: not colour alone (there is no red in the
+   palette; the message and the bar carry the state). */
 .error {
-  padding: var(--space-3);
-  border: 0.125rem solid var(--color-border);
-  border-inline-start-width: 0.375rem;
-  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-hairline);
+  border-inline-start: 0.375rem solid var(--color-accent);
 }
 
 .text {
   margin-block: 0 var(--space-2);
+  font-weight: 600;
 }
 
 .retry {
   min-block-size: var(--target-min);
   padding: var(--space-1) var(--space-3);
+  border: 0.0625rem solid var(--color-accent);
+  color: var(--color-accent);
+  background: none;
   font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }

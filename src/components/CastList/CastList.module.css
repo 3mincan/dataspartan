@@ -1,6 +1,4 @@
 .list {
-  display: grid;
-  gap: var(--space-1);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -9,10 +7,8 @@
 .link {
   display: block;
   min-block-size: var(--target-min);
-  padding: var(--space-1) var(--space-3);
-  border: 0.0625rem solid transparent;
-  border-inline-start-width: 0.25rem;
-  border-radius: var(--radius);
+  padding: var(--space-1) var(--space-1);
+  border-inline-start: 0.25rem solid transparent;
   color: var(--color-text);
   text-decoration: none;
 }
@@ -21,11 +17,12 @@
   text-decoration: underline;
 }
 
-/* Same non-colour cue as the film list: bar and bold weight. */
+/* Same non-colour cue as the film list: bar and heavier weight. */
 .link[aria-current='true'] {
-  border-color: var(--color-accent);
-  background-color: var(--color-selected);
-  font-weight: 700;
+  padding-inline-start: var(--space-2);
+  border-inline-start-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 800;
 }
 
 .empty {

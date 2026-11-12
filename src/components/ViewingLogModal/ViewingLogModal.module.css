@@ -7,12 +7,13 @@
 
 .title {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: var(--text-title);
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .subheading {
   margin-block: 0 var(--space-2);
-  font-size: 1rem;
 }
 
 .muted {
@@ -21,8 +22,6 @@
 }
 
 .list {
-  display: grid;
-  gap: var(--space-2);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -33,29 +32,30 @@
   align-items: start;
   justify-content: space-between;
   gap: var(--space-3);
-  padding-block: var(--space-2);
-  border-block-end: 0.0625rem solid var(--color-border);
+  padding-block: var(--space-3);
+  border-block-end: var(--border-hairline);
 }
 
 .when {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .description {
   margin: var(--space-1) 0 0;
+  color: var(--color-muted);
   overflow-wrap: anywhere;
   white-space: pre-line;
 }
 
 .form {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .field {
@@ -64,40 +64,62 @@
   gap: var(--space-1);
 }
 
+.fieldLabel {
+  font-weight: 600;
+}
+
 .input {
   min-block-size: var(--target-min);
-  padding: var(--space-1) var(--space-2);
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius);
+  padding: var(--space-2);
+  border: var(--border-hairline);
+  border-radius: 0;
   color: inherit;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   font: inherit;
 }
 
 /* Error state only after interaction or a submit attempt (:user-invalid),
-   shown as text plus a thicker border, never by colour alone. */
+   shown as text plus a thicker accent border, never by colour alone. */
 .error {
   display: none;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .input:user-invalid {
-  border-width: 0.1875rem;
+  border: 0.1875rem solid var(--color-accent);
 }
 
 .input:user-invalid + .error {
   display: block;
 }
 
-.button {
-  justify-self: start;
+.primary,
+.secondary {
   min-block-size: var(--target-min);
-  padding: var(--space-1) var(--space-3);
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius);
-  color: var(--color-text);
-  background-color: var(--color-surface);
+  padding: var(--space-2) var(--space-4);
   font: inherit;
+  font-size: var(--text-label);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
   cursor: pointer;
+}
+
+.primary {
+  justify-self: start;
+  border: 0.0625rem solid var(--color-accent);
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+}
+
+.secondary {
+  flex: none;
+  border: var(--border-hairline);
+  color: var(--color-text);
+  background: none;
+}
+
+.secondary:hover {
+  border-color: var(--color-accent);
 }

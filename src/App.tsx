@@ -124,7 +124,7 @@ export function App() {
       </a>
       <div className={styles.shell}>
         <nav aria-label="Films" className={styles.nav}>
-          <h2 className={styles.navHeading}>Films</h2>
+          <h2 className={`label ${styles.navHeading}`}>Films</h2>
           <FilmList
             films={films}
             selectedFilmId={view.filmId}

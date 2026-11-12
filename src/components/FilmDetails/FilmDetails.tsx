@@ -25,18 +25,18 @@ export function FilmDetails({
 }: FilmDetailsProps) {
   return (
     <>
-      <h1 id={headingId} tabIndex={-1}>
-        {film.episode_id} - {film.title}
+      <h1 id={headingId} tabIndex={-1} className={styles.title}>
+        <span className={styles.number}>{film.episode_id}</span> - {film.title}
       </h1>
 
-      <h2 className={styles.sectionHeading}>Opening crawl</h2>
+      <h2 className={`label ${styles.sectionHeading}`}>Opening crawl</h2>
       {/* Plain text child: React escapes it, and pre-line keeps SWAPI's line breaks. */}
       <p className={styles.crawl}>{film.opening_crawl}</p>
 
       <div className={styles.castSection}>
         <div className={styles.castLayout}>
           <div>
-            <h2 className={styles.sectionHeading}>Cast</h2>
+            <h2 className={`label ${styles.sectionHeading}`}>Cast</h2>
             <CastList
               filmId={film.episode_id}
               cast={cast}

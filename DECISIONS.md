@@ -209,7 +209,7 @@ Entries tagged *Assumption* must also appear in the README.
 - Consequences: dev-only; no runtime impact. Remove the override once
   the plugin publishes an ESLint 10 peer range.
 
-**D-029 — Colour palette and app name** · Accepted
+**D-029 — Colour palette and app name** · Palette superseded by D-033; app name still accepted
 - Context: D-021 needs text ≥ 4.5:1 and borders/focus ≥ 3:1 in both
   colour schemes; the page title needs an app name.
 - Decision: a neutral grey palette with one blue accent, defined as raw
@@ -264,3 +264,24 @@ Entries tagged *Assumption* must also appear in the README.
   are not covered by unit tests; they are checked by hand, including the
   Safari pointer fallback (owner).
 
+**D-033 — "Poster" look: palette, type and shapes** · Accepted
+- Context: D-031 design pass. The owner compared three mock-ups (Poster,
+  Console, Editorial) and chose Poster.
+- Decision: black/yellow, poster-like. One accent: Star Wars yellow
+  `#ffe81f` in dark, dark amber `#6e5300` in light (yellow fails 4.5:1 on a
+  light background). The opening crawl is always yellow on a black "stage"
+  in both schemes. Uppercase heavy titles, small tracked uppercase labels
+  (global `.label` utility), square corners, hairline borders, no shadows,
+  no gradients except the spinner ring. Type scale: label 0.75rem, body
+  1rem, lead 1.125rem, title `clamp()` 1.5–2rem, display `clamp()` 2–3rem
+  (max ≤ 1.5× min, so text zoom still scales it, WCAG 1.4.4). Spacing on
+  tokens `--space-1`…`--space-7`. Errors use no red: visible text plus a
+  thick accent border, so they never rely on colour (WCAG 1.4.1).
+  Ratios computed with the WCAG formula on 2026-11-12 (dark / light):
+  text on bg 17.31 / 16.73, text on surface – / 14.89, muted on bg
+  8.01 / 7.00, muted on surface 7.20 / 6.23, accent on bg 16.81 / 6.58,
+  accent on surface 15.12 / 5.86, on-accent on accent 16.81 / 7.24, border
+  on bg 3.77 / 3.59, border on surface 3.39 / 3.20, stage text on stage
+  16.81 (both).
+- Consequences: replaces D-029's blue palette; `--radius` and
+  `--color-selected` tokens removed. Any new pair is checked the same way.

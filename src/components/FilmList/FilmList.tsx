@@ -63,7 +63,8 @@ export function FilmList({
               className={styles.link}
               onClick={handleClick}
             >
-              {id} - {film.title}
+              {/* Same text as "{id} - {title}"; the span only styles the number. */}
+              <span className={styles.number}>{id}</span> - {film.title}
             </a>
             <button
               id={logButtonId(id)}
@@ -74,7 +75,9 @@ export function FilmList({
             >
               {/* The name keeps the visible word "log" (WCAG 2.5.3) and says
                   which film it belongs to. */}
-              <span aria-hidden="true">Log</span>
+              <span aria-hidden="true" className={styles.logText}>
+                Log
+              </span>
               <span className="visually-hidden">Viewing log for {film.title}</span>
               {count > 0 && (
                 <>

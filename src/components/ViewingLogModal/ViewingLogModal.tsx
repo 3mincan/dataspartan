@@ -160,16 +160,14 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
           Viewing log — {film.title}
         </h2>
         <form method="dialog">
-          <button type="submit" className={styles.button}>
+          <button type="submit" className={styles.secondary}>
             Close
           </button>
         </form>
       </header>
 
       <div>
-        <h3 className={styles.subheading}>
-          Viewings
-        </h3>
+        <h3 className={`label ${styles.subheading}`}>Viewings</h3>
         {viewings.length === 0 ? (
           <p className={styles.muted}>No viewings recorded yet.</p>
         ) : (
@@ -186,7 +184,7 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
                 </div>
                 <button
                   type="button"
-                  className={styles.button}
+                  className={styles.secondary}
                   onClick={() => handleDelete(viewing, index)}
                 >
                   Delete{' '}
@@ -199,11 +197,13 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h3 className={styles.subheading}>Add a viewing</h3>
+        <h3 className={`label ${styles.subheading}`}>Add a viewing</h3>
         <div className={styles.row}>
           {(['date', 'time'] as const).map((field) => (
             <div key={field} className={styles.field}>
-              <label htmlFor={`viewing-${field}`}>{REQUIRED_FIELDS[field].label} (required)</label>
+              <label htmlFor={`viewing-${field}`} className={styles.fieldLabel}>
+                {REQUIRED_FIELDS[field].label} (required)
+              </label>
               <input
                 type={field}
                 className={styles.input}
@@ -226,7 +226,9 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
           ))}
         </div>
         <div className={styles.field}>
-          <label htmlFor="viewing-description">Description (optional)</label>
+          <label htmlFor="viewing-description" className={styles.fieldLabel}>
+            Description (optional)
+          </label>
           <textarea
             id="viewing-description"
             name="description"
@@ -235,7 +237,7 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
             className={styles.input}
           />
         </div>
-        <button type="submit" className={styles.button}>
+        <button type="submit" className={styles.primary}>
           Add viewing
         </button>
       </form>

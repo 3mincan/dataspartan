@@ -52,7 +52,7 @@ function RobotFacts({ robot }: { robot: RobotDetails }) {
   return (
     <>
       {/* Icon plus visible text: the mark never depends on the image alone. */}
-      <p className={styles.robotMark}>
+      <p className={`label ${styles.robotMark}`}>
         <RobotIcon />
         Artificial being
       </p>
@@ -80,7 +80,7 @@ function OrganicFacts({ organic }: { organic: OrganicDetails }) {
 function Fact({ label, value }: { label: string; value: string }) {
   return (
     <div className={styles.fact}>
-      <dt>{label}</dt>
+      <dt className="label">{label}</dt>
       <dd>{value}</dd>
     </div>
   );

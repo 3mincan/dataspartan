@@ -1,25 +1,27 @@
+/* No box: a heading and a row of facts, separated from the cast by space. */
 .card {
-  padding: var(--space-4);
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius);
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
 }
 
 .name {
-  margin-block: 0 var(--space-3);
-  font-size: 1.25rem;
+  margin: 0;
+  font-size: var(--text-title);
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-/* Accent text and icon on the page background: 6.8:1 light, 8.8:1 dark (D-029). */
+/* Outlined tag in the accent colour: 16.8:1 dark, 6.6:1 light (D-033). The
+   icon and the text both carry the meaning; colour is not needed. */
 .robotMark {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-block: 0 var(--space-3);
-  padding: var(--space-1) var(--space-3);
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
   border: 0.0625rem solid var(--color-accent);
-  border-radius: 999px;
   color: var(--color-accent);
-  font-weight: 700;
 }
 
 .icon {
@@ -31,17 +33,15 @@
 /* Label/value pairs flow into as many columns as fit. */
 .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  gap: var(--space-3) var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--space-4) var(--space-6);
+  justify-self: stretch;
   margin: 0;
-}
-
-.fact dt {
-  color: var(--color-muted);
-  font-size: 0.875rem;
 }
 
 .fact dd {
   margin: 0;
-  font-weight: 600;
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.2;
 }
