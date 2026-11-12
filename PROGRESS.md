@@ -20,7 +20,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T4 — Film details and cast
+- **In progress:** T4 — Film details and cast (owner check left)
 - **Next up:** T5 — Character details
 - **Blocked:** —
 
@@ -73,13 +73,13 @@ Guides: `accessibility`, `spinner`, `single-line-overflow`, `scrollability-affor
 
 ### T4 — Film details and cast (GOAL F2)
 Guides: `css-layout`, `size-aware-styling`, `accessibility`
-- [ ] `FilmDetails`: `<h1>` heading, opening crawl (`pre-line`, rendered as text)
-- [ ] `CastList` with `useCast`: loading, error + retry; entries as links with
+- [x] `FilmDetails`: `<h1>` heading, opening crawl (`pre-line`, rendered as text)
+- [x] `CastList` with `useCast`: loading, error + retry; entries as links with
       `aria-current="true"` on the selected one
-- [ ] Cast section as a size container; side by side / stacked via `@container`
-- [ ] Selected character resets when the film changes
-- [ ] Announce "Showing details for <name>" on selection
-- [ ] Component test with `axe-core` run
+- [x] Cast section as a size container; side by side / stacked via `@container`
+- [x] Selected character resets when the film changes
+- [x] Announce "Showing details for <name>" on selection
+- [x] Component test with `axe-core` run
 
 ### T5 — Character details (GOAL F3)
 Guides: `accessibility`, `icons`
@@ -88,7 +88,7 @@ Guides: `accessibility`, `icons`
 - [ ] Organic card: species name, classification, homeworld, height, birth year
 - [ ] Label/value pairs as a `<dl>`
 - [ ] Unknown values rendered via `formatValue`
-- [ ] "Character not found in this film" state for an unknown `character` value (D-027)
+- [x] "Character not found in this film" state for an unknown `character` value (D-027, done in T4)
 - [ ] Tests: `loadCharacterDetails` (droid, non-human, human fallback); card test with `axe-core` run
 
 ### T6 — Viewing log (GOAL F4)
@@ -212,6 +212,18 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — T4: `FilmDetails` (h1, crawl as text with `pre-line`),
+  `CastList` (links, `aria-current="true"`, loading/error/empty), cast
+  section as a named size container (side by side above 36rem, sticky
+  panel), main zone scrolls to top on film change. `App` owns the cast so
+  title and announcer can use the character name; panel shows the name or
+  "Character not found in this film" until T5. Tests: CastList, FilmDetails
+  (incl. crawl rendered as text), App (character deep link, film change
+  clears character, character not found). Chrome, real API: deep link
+  `?film=4&character=2` OK; 7 rapid film switches end on film 6 with its
+  20 characters (no stale data); no console errors. Guides: `css-layout`,
+  `size-aware-styling`, `accessibility`. Next: owner check, then T5.
 
 - 2026-11-12 — Owner keyboard check of T3: tab order skip link → films →
   log buttons with visible focus, Enter selects, selected row clear in the

@@ -1,0 +1,41 @@
+.sectionHeading {
+  margin-block: var(--space-5) var(--space-3);
+  font-size: 1.25rem;
+}
+
+.crawl {
+  max-inline-size: 40rem;
+  margin-inline: auto;
+  padding: var(--space-4);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  text-align: center;
+  white-space: pre-line;
+}
+
+/* Size container: the cast layout depends on the space the main zone gives
+   it, not on the viewport (size-aware-styling guide, D-018). */
+.castSection {
+  container: cast / inline-size;
+}
+
+/* Stacked by default; side by side when there is room. */
+.castLayout {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@container cast (inline-size > 36rem) {
+  .castLayout {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: start;
+  }
+
+  /* Keeps the details in view while scrolling a long cast list. It sits in
+     its own column, so it never covers a focused cast link (WCAG 2.4.11). */
+  .panel {
+    position: sticky;
+    inset-block-start: 0;
+  }
+}

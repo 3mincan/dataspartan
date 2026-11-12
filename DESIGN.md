@@ -85,9 +85,10 @@ To build: the remaining components, their styles and tests, README.
 App
 ├─ FilmList            films (AsyncResult<Film[]>), selectedFilmId, onSelect, onOpenLog,
 │                      viewingCount(filmId) (added in T6)
-├─ FilmDetails         film
-│  ├─ CastList         filmId, cast (AsyncResult<Person[]>), selectedId, onSelect
-│  └─ CharacterCard    details (AsyncResult<CharacterDetails>)
+├─ FilmDetails         film, headingId, cast (AsyncResult<Person[]>), selectedCharacterId,
+│  │                   onSelectCharacter, characterPanel (ReactNode)
+│  ├─ CastList         filmId, cast, selectedId, onSelect
+│  └─ characterPanel   CharacterCard (T5) / prompt / "Character not found in this film"
 └─ ViewingLogModal     film, viewings, onAdd, onRemove, onClose
 ```
 
@@ -104,7 +105,9 @@ of truth for what is on screen (D-023); `App` reads it with `useUrlState()`.
 | viewings             | `useViewingLog` (React state) | in memory, not in the URL (D-026)      |
 | form draft           | the form's DOM                | not in the URL                         |
 
-Remote data is derived from the URL:
+`App` owns the remote data (films, cast, character details) because the
+page title and the announcer need it; components below it are
+presentational. Remote data is derived from the URL:
 `useFilms()` → `selectedFilm = films.find(episode_id === view.filmId)` →
 `useCast(selectedFilm)` → `useCharacterDetails(personUrl(view.characterId))`.
 
