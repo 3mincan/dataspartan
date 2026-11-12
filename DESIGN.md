@@ -88,7 +88,8 @@ App
 ├─ FilmDetails         film, headingId, cast (AsyncResult<Person[]>), selectedCharacterId,
 │  │                   onSelectCharacter, characterPanel (ReactNode)
 │  ├─ CastList         filmId, cast, selectedId, onSelect
-│  └─ characterPanel   CharacterCard (T5) / prompt / "Character not found in this film"
+│  └─ characterPanel   CharacterCard (name, details: AsyncResult<CharacterDetails>)
+│                      / prompt / "Character not found in this film"
 └─ ViewingLogModal     film, viewings, onAdd, onRemove, onClose
 ```
 

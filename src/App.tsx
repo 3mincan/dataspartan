@@ -1,9 +1,12 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import styles from './App.module.css';
+import { personUrl } from './api/swapi';
+import { CharacterCard } from './components/CharacterCard/CharacterCard';
 import { FilmDetails } from './components/FilmDetails/FilmDetails';
 import { FilmList } from './components/FilmList/FilmList';
 import { Announcer } from './components/ui/Announcer/Announcer';
 import { useCast } from './hooks/useCast';
+import { useCharacterDetails } from './hooks/useCharacterDetails';
 import { useFilms } from './hooks/useFilms';
 import { useUrlState } from './hooks/useUrlState';
 import { APP_NAME, pageTitle } from './utils/title';
@@ -30,6 +33,11 @@ export function App() {
     view.characterId !== null && cast.status === 'success'
       ? cast.data.find((person) => personIdFromUrl(person.url) === view.characterId)
       : undefined;
+  // Started from the URL id, so it runs in parallel with the cast request
+  // (both share the cached person request).
+  const characterDetails = useCharacterDetails(
+    selectedFilm && view.characterId !== null ? personUrl(view.characterId) : null,
+  );
   const characterNotFound =
     view.characterId !== null && cast.status === 'success' && selectedPerson === undefined;
 
@@ -59,7 +67,7 @@ export function App() {
       <p className={styles.muted}>Select a character to see their details.</p>
     );
     if (selectedPerson) {
-      characterPanel = <h2>{selectedPerson.name}</h2>;
+      characterPanel = <CharacterCard name={selectedPerson.name} details={characterDetails} />;
     } else if (characterNotFound) {
       characterPanel = <p>Character not found in this film.</p>;
     }

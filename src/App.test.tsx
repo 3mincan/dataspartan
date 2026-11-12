@@ -5,12 +5,18 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import type { Film, Person } from './api/types';
 import { App } from './App';
 
-vi.mock('./api/swapi', () => ({
+// Network functions are mocked; pure helpers such as personUrl stay real.
+vi.mock('./api/swapi', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./api/swapi')>()),
   getFilms: vi.fn(),
   getPerson: vi.fn(),
+  getSpecies: vi.fn(),
+  getPlanet: vi.fn(),
 }));
 
-const { getFilms, getPerson } = await import('./api/swapi');
+const { getFilms, getPerson, getSpecies, getPlanet } = await import('./api/swapi');
+
+const DROID_URL = 'https://swapi.dev/api/species/2/';
 
 const films: Film[] = [
   {
@@ -44,7 +50,7 @@ const people: Record<string, Person> = Object.fromEntries(
         height: '172',
         mass: '77',
         birth_year: '19BBY',
-        species: [],
+        species: name === 'C-3PO' ? [DROID_URL] : [],
         homeworld: 'https://swapi.dev/api/planets/1/',
         url,
       },
@@ -60,6 +66,8 @@ beforeEach(() => {
     if (!person) throw new Error(`Unexpected request: ${url}`);
     return person;
   });
+  vi.mocked(getSpecies).mockResolvedValue({ name: 'Droid', classification: 'artificial', url: DROID_URL });
+  vi.mocked(getPlanet).mockResolvedValue({ name: 'Tatooine', url: 'https://swapi.dev/api/planets/1/' });
 });
 
 it('renders the shell: skip link, labelled nav, one main with the heading', async () => {
@@ -131,6 +139,7 @@ it('shows the crawl and cast of the selected film; a character deep link selects
   const threepio = await screen.findByRole('link', { name: 'C-3PO' });
   expect(threepio).toHaveAttribute('aria-current', 'true');
   expect(screen.getByRole('heading', { level: 2, name: 'C-3PO' })).toBeInTheDocument();
+  expect(await screen.findByText('Artificial being')).toBeInTheDocument();
   expect(screen.getByRole('status')).toHaveTextContent('Showing details for C-3PO');
   expect(document.title).toBe('C-3PO – A New Hope – Star Wars Films');
 
@@ -145,6 +154,7 @@ it('selecting a character, then another film, clears the character', async () =>
   await userEvent.click(await screen.findByRole('link', { name: 'Luke Skywalker' }));
   expect(window.location.search).toBe('?film=4&character=1');
   expect(screen.getByRole('heading', { level: 2, name: 'Luke Skywalker' })).toBeInTheDocument();
+  expect(await screen.findByText('Tatooine')).toBeInTheDocument();
 
   await userEvent.click(screen.getByRole('link', { name: '5 - The Empire Strikes Back' }));
   expect(window.location.search).toBe('?film=5');

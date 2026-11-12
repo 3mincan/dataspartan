@@ -1,0 +1,47 @@
+.card {
+  padding: var(--space-4);
+  border: 0.0625rem solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.name {
+  margin-block: 0 var(--space-3);
+  font-size: 1.25rem;
+}
+
+/* Accent text and icon on the page background: 6.8:1 light, 8.8:1 dark (D-029). */
+.robotMark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block: 0 var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border: 0.0625rem solid var(--color-accent);
+  border-radius: 999px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.icon {
+  flex: none;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+}
+
+/* Label/value pairs flow into as many columns as fit. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: var(--space-3) var(--space-5);
+  margin: 0;
+}
+
+.fact dt {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.fact dd {
+  margin: 0;
+  font-weight: 600;
+}

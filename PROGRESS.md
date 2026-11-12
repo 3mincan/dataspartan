@@ -20,7 +20,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T5 — Character details
+- **In progress:** T5 — Character details (owner check left)
 - **Next up:** T6 — Viewing log
 - **Blocked:** —
 
@@ -83,13 +83,13 @@ Guides: `css-layout`, `size-aware-styling`, `accessibility`
 
 ### T5 — Character details (GOAL F3)
 Guides: `accessibility`, `icons`
-- [ ] `CharacterCard` with `useCharacterDetails`: loading, error + retry
-- [ ] Robot card: artificial-being mark (icon + visible text), height, mass, manufacturing year
-- [ ] Organic card: species name, classification, homeworld, height, birth year
-- [ ] Label/value pairs as a `<dl>`
-- [ ] Unknown values rendered via `formatValue`
+- [x] `CharacterCard` with `useCharacterDetails`: loading, error + retry
+- [x] Robot card: artificial-being mark (icon + visible text), height, mass, manufacturing year
+- [x] Organic card: species name, classification, homeworld, height, birth year
+- [x] Label/value pairs as a `<dl>`
+- [x] Unknown values rendered via `formatValue`
 - [x] "Character not found in this film" state for an unknown `character` value (D-027, done in T4)
-- [ ] Tests: `loadCharacterDetails` (droid, non-human, human fallback); card test with `axe-core` run
+- [x] Tests: `loadCharacterDetails` (droid, non-human, human fallback); card test with `axe-core` run
 
 ### T6 — Viewing log (GOAL F4)
 Guides: `dialog`, `prevent-page-scroll-under-modal-dialog`, `platform-controls-dismiss-dialog`, `light-dismiss-a-dialog`,
@@ -121,7 +121,8 @@ Guides: `dialog`, `prevent-page-scroll-under-modal-dialog`, `platform-controls-d
 Guides: `accessibility`, `performance`, `security`, `respect-os-text-scale`
 
 Tests and robustness
-- [ ] Tests: `api/swapi` (cache, de-duplication, eviction, sorting), `utils/character`
+- [ ] Tests: `api/swapi` (cache, de-duplication, eviction, sorting)
+- [x] Tests: `utils/character` (done in T5)
 - [ ] `App` smoke test (select film → crawl + cast; change film clears character) with `axe-core` run
 - [ ] No console errors or warnings; rapid film/character switching shows no stale data
 - [ ] `guidance:scan` reports 0 findings
@@ -212,6 +213,18 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — T5: `CharacterCard` (name heading shows at once; loading,
+  error + retry; robot: inline SVG + visible "Artificial being", height,
+  mass, manufacturing year; organic: species, classification, homeworld,
+  height, birth year; `<dl>`; `formatValue`). Details start from
+  `personUrl(view.characterId)` in `App` (pure URL helper, no network), in
+  parallel with the cast. Made `"strict": true` explicit in both tsconfigs
+  (TypeScript 6 already defaults to it). Tests: `loadCharacterDetails`
+  (droid without homeworld request, non-human, human fallback, failure),
+  `utils/character`, CharacterCard (axe), App with details. Chrome, real
+  API: R2-D2, Obi-Wan, Chewbacca correct; no console errors. Guides:
+  `icons`, `accessibility`. Next: owner check, then T6.
 
 - 2026-11-12 — Owner check of T4: keyboard into the cast list and Enter
   selects; cast and panel stack when narrow; crawl box and selected cast
