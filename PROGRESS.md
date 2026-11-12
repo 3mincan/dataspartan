@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T6 — Viewing log (owner: Safari + keyboard check left)
-- **Next up:** T6.5 — Visual design pass
+- **In progress:** T6.5 — Visual design pass
+- **Next up:** T7 — Quality pass and WCAG 2.2 AA audit
 - **Blocked:** —
 
 ## Tasks
@@ -111,8 +111,8 @@ Guides: `dialog`, `prevent-page-scroll-under-modal-dialog`, `platform-controls-d
 - [x] Polite status region inside the modal: "Viewing added" / "Viewing deleted"
 - [x] Focus after delete: next delete button, else previous, else date field
 - [x] Viewing count on the log button
-- [~] Verify by hand in Chrome and Safari: close button, Esc and outside click all close;
-      (Chrome done 2026-11-12; Safari pending, owner)
+- [x] Verify by hand in Chrome and Safari: close button, Esc and outside click all close;
+      (Chrome 2026-11-12; Safari and keyboard by the owner 2026-11-12)
       focus returns to the log button; page does not scroll behind; drag-select ending on the
       backdrop does not close
 - [x] Tests: `useViewingLog`, modal validation / add / delete / focus after delete
@@ -228,6 +228,10 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner check of T6 in Safari and by keyboard: all three close
+  paths, drag-select does not close, add/delete/focus OK, page does not
+  scroll behind the modal. T6 done. Next: T6.5.
 
 - 2026-11-12 — T6: `ui/Modal` (native dialog following the URL,
   `closedby="any"` + Safari pointer fallback, CSS scroll lock, focus
