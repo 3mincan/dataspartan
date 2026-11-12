@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T4 — Film details and cast (owner check left)
-- **Next up:** T5 — Character details
+- **In progress:** T5 — Character details
+- **Next up:** T6 — Viewing log
 - **Blocked:** —
 
 ## Tasks
@@ -212,6 +212,10 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner check of T4: keyboard into the cast list and Enter
+  selects; cast and panel stack when narrow; crawl box and selected cast
+  entry clear in the light scheme. T4 done. Next: T5.
 
 - 2026-11-12 — T4: `FilmDetails` (h1, crawl as text with `pre-line`),
   `CastList` (links, `aria-current="true"`, loading/error/empty), cast
