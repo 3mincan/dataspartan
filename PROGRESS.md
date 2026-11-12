@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T3 — Film list (owner keyboard check left)
-- **Next up:** T4 — Film details and cast
+- **In progress:** T4 — Film details and cast
+- **Next up:** T5 — Character details
 - **Blocked:** —
 
 ## Tasks
@@ -212,6 +212,10 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner keyboard check of T3: tab order skip link → films →
+  log buttons with visible focus, Enter selects, selected row clear in the
+  light scheme. T3 done. Next: T4.
 
 - 2026-11-12 — Owner decided the cast stays all-or-nothing (D-030; the
   owner's draft was numbered D-028, renumbered because D-028/D-029 exist).
