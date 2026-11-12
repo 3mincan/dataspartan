@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T5 — Character details (owner check left)
-- **Next up:** T6 — Viewing log
+- **In progress:** T6 — Viewing log
+- **Next up:** T7 — Quality pass and WCAG 2.2 AA audit
 - **Blocked:** —
 
 ## Tasks
@@ -213,6 +213,11 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner check of T5: droid and non-droid cards correct,
+  badge and labels readable in the light scheme, card fine narrow and wide.
+  T5 done. Owner finds the current look plain/ugly; visual design pass
+  under discussion.
 
 - 2026-11-12 — T5: `CharacterCard` (name heading shows at once; loading,
   error + retry; robot: inline SVG + visible "Artificial being", height,
