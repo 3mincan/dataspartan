@@ -19,7 +19,11 @@ const films = [film(4, 'A New Hope'), film(5, 'The Empire Strikes Back')];
 const retry = vi.fn();
 const success: AsyncResult<Film[]> = { status: 'success', data: films, retry };
 
-function renderList(state: AsyncResult<Film[]>, selectedFilmId: number | null = null) {
+function renderList(
+  state: AsyncResult<Film[]>,
+  selectedFilmId: number | null = null,
+  viewingCount: (filmId: number) => number = () => 0,
+) {
   const onSelect = vi.fn();
   const onOpenLog = vi.fn();
   const utils = render(
@@ -29,6 +33,7 @@ function renderList(state: AsyncResult<Film[]>, selectedFilmId: number | null = 
         selectedFilmId={selectedFilmId}
         onSelect={onSelect}
         onOpenLog={onOpenLog}
+        viewingCount={viewingCount}
       />
     </nav>,
   );
@@ -103,5 +108,15 @@ describe('FilmList', () => {
 
     await userEvent.click(button);
     expect(onOpenLog).toHaveBeenCalledWith(5);
+  });
+
+  it('shows the number of viewings on the log button', () => {
+    renderList(success, null, (filmId) => (filmId === 4 ? 2 : 0));
+    expect(
+      screen.getByRole('button', { name: 'Viewing log for A New Hope, 2 viewings' }),
+    ).toHaveTextContent('Log');
+    expect(
+      screen.getByRole('button', { name: 'Viewing log for The Empire Strikes Back' }),
+    ).toBeInTheDocument();
   });
 });

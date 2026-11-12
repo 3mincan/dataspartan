@@ -5,15 +5,23 @@ import { isPlainLeftClick, toHref } from '../../utils/url';
 import { ErrorMessage } from '../ui/ErrorMessage/ErrorMessage';
 import { Spinner } from '../ui/Spinner/Spinner';
 import styles from './FilmList.module.css';
+import { logButtonId } from './logButtonId';
 
 interface FilmListProps {
   films: AsyncResult<Film[]>;
   selectedFilmId: number | null;
   onSelect: (filmId: number) => void;
   onOpenLog: (filmId: number) => void;
+  viewingCount: (filmId: number) => number;
 }
 
-export function FilmList({ films, selectedFilmId, onSelect, onOpenLog }: FilmListProps) {
+export function FilmList({
+  films,
+  selectedFilmId,
+  onSelect,
+  onOpenLog,
+  viewingCount,
+}: FilmListProps) {
   switch (films.status) {
     case 'idle':
     case 'loading':
@@ -37,6 +45,7 @@ export function FilmList({ films, selectedFilmId, onSelect, onOpenLog }: FilmLis
       {films.data.map((film) => {
         const id = film.episode_id;
         const selected = id === selectedFilmId;
+        const count = viewingCount(id);
 
         // A real link, so open-in-new-tab and copy-link work (D-024); a plain
         // click is handled in-app without a reload.
@@ -57,6 +66,7 @@ export function FilmList({ films, selectedFilmId, onSelect, onOpenLog }: FilmLis
               {id} - {film.title}
             </a>
             <button
+              id={logButtonId(id)}
               type="button"
               aria-haspopup="dialog"
               className={styles.logButton}
@@ -66,6 +76,16 @@ export function FilmList({ films, selectedFilmId, onSelect, onOpenLog }: FilmLis
                   which film it belongs to. */}
               <span aria-hidden="true">Log</span>
               <span className="visually-hidden">Viewing log for {film.title}</span>
+              {count > 0 && (
+                <>
+                  <span aria-hidden="true" className={styles.count}>
+                    {count}
+                  </span>
+                  <span className="visually-hidden">
+                    , {count} {count === 1 ? 'viewing' : 'viewings'}
+                  </span>
+                </>
+              )}
             </button>
           </li>
         );

@@ -90,7 +90,9 @@ App
 │  ├─ CastList         filmId, cast, selectedId, onSelect
 │  └─ characterPanel   CharacterCard (name, details: AsyncResult<CharacterDetails>)
 │                      / prompt / "Character not found in this film"
-└─ ViewingLogModal     film, viewings, onAdd, onRemove, onClose
+└─ ViewingLogModal     film (URL's log film or undefined), getViewings, onAdd, onRemove,
+   │                   onClose, logButtonId
+   └─ ui/Modal         open, labelledBy, onClose, fallbackFocusId
 ```
 
 ## State
@@ -218,6 +220,16 @@ Follows the Modern Web Guidance `dialog`, `prevent-page-scroll-under-modal-dialo
      backdrop must not dismiss). If JSX types reject `closedby`, set it
      with `setAttribute` in the ref callback.
 - An unsaved draft in the add form is discarded on close (D-020).
+- The modal keeps rendering the last film while it closes: the browser only
+  returns focus to the opener if focus is still inside the dialog at close.
+- Focus fallback: if, at the `close` event, focus is on `<body>` or still
+  inside the closed dialog (deep link without opener; light dismiss, where
+  the outside press first focuses the dialog itself), focus moves to the
+  film's log button (D-032).
+- `autofocus` on the date field is written as a real attribute through a ref,
+  because React's `autoFocus` never reaches the DOM (D-032).
+- Status texts name the viewing ("Viewing from <when> added"), so two adds
+  in a row both change the live region and are announced.
 - Scroll lock, in CSS only:
   `dialog:modal { overscroll-behavior: contain; }` and
   `dialog::backdrop { overflow: hidden; overscroll-behavior: contain; }`.

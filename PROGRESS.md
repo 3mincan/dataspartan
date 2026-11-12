@@ -20,7 +20,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T6 — Viewing log
+- **In progress:** T6 — Viewing log (owner: Safari + keyboard check left)
 - **Next up:** T6.5 — Visual design pass
 - **Blocked:** —
 
@@ -94,27 +94,28 @@ Guides: `accessibility`, `icons`
 ### T6 — Viewing log (GOAL F4)
 Guides: `dialog`, `prevent-page-scroll-under-modal-dialog`, `platform-controls-dismiss-dialog`, `light-dismiss-a-dialog`,
 `forms`, `required-field-feedback`, `validate-input-after-interaction`, `accessible-error-announcement`
-- [ ] `ui/Modal`: native `<dialog>`, `showModal()` from an effect, `aria-labelledby`,
+- [x] `ui/Modal`: native `<dialog>`, `showModal()` from an effect, `aria-labelledby`,
       state synced on the `close` event (D-015)
-- [ ] Modal follows the URL both ways: `log` set → open, unset → close; `close` event → `closeLog()` (D-025)
-- [ ] Deep link `/?log=N`: opens after films load; on close, focus moves to that film's log button
-- [ ] Unknown `log` value is removed from the URL (D-027)
-- [ ] No `role="dialog"`, `aria-modal`, focus trap, Esc handler or focus-return code
-- [ ] Visible close button in `<form method="dialog">`
-- [ ] Light dismiss: `closedby="any"` + feature-detected pointer fallback for Safari (D-020)
-- [ ] Scroll lock CSS on `dialog:modal` and `::backdrop`; layout scoped to `dialog[open]`
-- [ ] `ViewingLogModal`: list (newest first), empty state, delete with a descriptive accessible name
-- [ ] Add form: visible labels, "(required)" in the label text, date + time `required`,
+- [x] Modal follows the URL both ways: `log` set → open, unset → close; `close` event → `closeLog()` (D-025)
+- [x] Deep link `/?log=N`: opens after films load; on close, focus moves to that film's log button
+- [x] Unknown `log` value is removed from the URL (D-027)
+- [x] No `role="dialog"`, `aria-modal`, focus trap, Esc handler or focus-return code (the browser's own return is used; only the lost-focus fallback of D-032 is added)
+- [x] Visible close button in `<form method="dialog">`
+- [x] Light dismiss: `closedby="any"` + feature-detected pointer fallback for Safari (D-020)
+- [x] Scroll lock CSS on `dialog:modal` and `::backdrop`; layout scoped to `dialog[open]`
+- [x] `ViewingLogModal`: list (newest first), empty state, delete with a descriptive accessible name
+- [x] Add form: visible labels, "(required)" in the label text, date + time `required`,
       optional description (`maxlength`), `autofocus` on date
-- [ ] Errors via `:user-invalid` with visible text; `aria-invalid` / `aria-describedby` synced (D-017)
-- [ ] Form resets after add; modal stays open
-- [ ] Polite status region inside the modal: "Viewing added" / "Viewing deleted"
-- [ ] Focus after delete: next delete button, else previous, else date field
-- [ ] Viewing count on the log button
-- [ ] Verify by hand in Chrome and Safari: close button, Esc and outside click all close;
+- [x] Errors via `:user-invalid` with visible text; `aria-invalid` / `aria-describedby` synced (D-017)
+- [x] Form resets after add; modal stays open
+- [x] Polite status region inside the modal: "Viewing added" / "Viewing deleted"
+- [x] Focus after delete: next delete button, else previous, else date field
+- [x] Viewing count on the log button
+- [~] Verify by hand in Chrome and Safari: close button, Esc and outside click all close;
+      (Chrome done 2026-11-12; Safari pending, owner)
       focus returns to the log button; page does not scroll behind; drag-select ending on the
       backdrop does not close
-- [ ] Tests: `useViewingLog`, modal validation / add / delete / focus after delete
+- [x] Tests: `useViewingLog`, modal validation / add / delete / focus after delete
       (stub `showModal` in jsdom), `axe-core` run
 
 ### T6.5 — Visual design pass (D-031)
@@ -227,6 +228,24 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — T6: `ui/Modal` (native dialog following the URL,
+  `closedby="any"` + Safari pointer fallback, CSS scroll lock, focus
+  fallback), `ViewingLogModal` (list newest first, empty state, delete with
+  descriptive names and focus management, add form with `:user-invalid`
+  synced ARIA and delayed error announcement, own status region), viewing
+  count on the log button, unknown `log` removed from the URL. D-032 for
+  the autofocus, light-dismiss focus and jsdom findings. Tests:
+  `useViewingLog`, ViewingLogModal (validation, add, delete, focus after
+  delete, axe), App (open/close ↔ URL, deep link + focus, unknown log,
+  count). Chrome, real API: all three close paths return focus to the log
+  button with stable history length; deep link `/?log=4` closes to `/`;
+  required errors visible with synced ARIA; add ×2 and keyboard delete;
+  backdrop scroll does not move the page; drag-select onto the backdrop
+  does not close; no console errors. Guides: `dialog`,
+  `prevent-page-scroll-under-modal-dialog`, `light-dismiss-a-dialog`,
+  `required-field-feedback`, `accessible-error-announcement`.
+  Next: owner check in Safari and by keyboard, then T6.5.
 
 - 2026-11-12 — Owner added a visual design pass after T6 (T6.5, D-031).
 

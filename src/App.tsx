@@ -4,19 +4,23 @@ import { personUrl } from './api/swapi';
 import { CharacterCard } from './components/CharacterCard/CharacterCard';
 import { FilmDetails } from './components/FilmDetails/FilmDetails';
 import { FilmList } from './components/FilmList/FilmList';
+import { logButtonId } from './components/FilmList/logButtonId';
+import { ViewingLogModal } from './components/ViewingLogModal/ViewingLogModal';
 import { Announcer } from './components/ui/Announcer/Announcer';
 import { useCast } from './hooks/useCast';
 import { useCharacterDetails } from './hooks/useCharacterDetails';
 import { useFilms } from './hooks/useFilms';
 import { useUrlState } from './hooks/useUrlState';
+import { useViewingLog } from './hooks/useViewingLog';
 import { APP_NAME, pageTitle } from './utils/title';
 import { personIdFromUrl } from './utils/url';
 
 const MAIN_HEADING_ID = 'main-heading';
 
 export function App() {
-  const { view, selectFilm, selectCharacter, openLog } = useUrlState();
+  const { view, selectFilm, selectCharacter, openLog, closeLog } = useUrlState();
   const films = useFilms();
+  const viewingLog = useViewingLog();
   const mainRef = useRef<HTMLElement>(null);
 
   const findFilm = (episodeId: number | null) =>
@@ -41,10 +45,20 @@ export function App() {
   const characterNotFound =
     view.characterId !== null && cast.status === 'success' && selectedPerson === undefined;
 
+  const logFilm = findFilm(view.logFilmId);
+  const logNotFound =
+    view.logFilmId !== null && films.status === 'success' && logFilm === undefined;
+
+  // An unknown `log` value is dropped from the URL (D-027): there is no
+  // dialog to show, and leaving it would reopen nothing on every reload.
+  useEffect(() => {
+    if (logNotFound) closeLog();
+  }, [logNotFound, closeLog]);
+
   const title = pageTitle({
     filmTitle: filmNotFound ? 'Film not found' : selectedFilm?.title,
     characterName: selectedPerson?.name,
-    logFilmTitle: findFilm(view.logFilmId)?.title,
+    logFilmTitle: logFilm?.title,
   });
 
   useEffect(() => {
@@ -116,12 +130,21 @@ export function App() {
             selectedFilmId={view.filmId}
             onSelect={selectFilm}
             onOpenLog={openLog}
+            viewingCount={(filmId) => viewingLog.getViewings(filmId).length}
           />
         </nav>
         <main ref={mainRef} className={styles.main}>
           {mainContent}
         </main>
       </div>
+      <ViewingLogModal
+        film={logFilm}
+        getViewings={viewingLog.getViewings}
+        onAdd={viewingLog.addViewing}
+        onRemove={viewingLog.removeViewing}
+        onClose={closeLog}
+        logButtonId={logButtonId}
+      />
       <Announcer message={announcement} />
     </>
   );

@@ -50,6 +50,15 @@
   cursor: pointer;
 }
 
+.count {
+  margin-inline-start: var(--space-1);
+  padding-inline: var(--space-1);
+  border-radius: var(--radius);
+  color: var(--color-bg);
+  background-color: var(--color-text);
+  font-weight: 700;
+}
+
 .empty {
   color: var(--color-muted);
 }

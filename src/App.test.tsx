@@ -1,7 +1,7 @@
 import axe from 'axe-core';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Film, Person } from './api/types';
 import { App } from './App';
 
@@ -166,4 +166,55 @@ it('shows "Character not found in this film" for a character outside the cast', 
   window.history.replaceState(null, '', '/?film=4&character=99');
   render(<App />);
   expect(await screen.findByText('Character not found in this film.')).toBeInTheDocument();
+});
+
+describe('viewing log modal and the URL', () => {
+  it('the log button opens the modal and adds ?log; closing goes back', async () => {
+    window.history.replaceState(null, '', '/?film=4');
+    render(<App />);
+    await userEvent.click(await screen.findByRole('button', { name: 'Viewing log for A New Hope' }));
+
+    expect(window.location.search).toBe('?film=4&log=4');
+    const dialog = screen.getByRole('dialog', { name: 'Viewing log — A New Hope' });
+    expect(dialog).toHaveAttribute('open');
+
+    // Esc, light dismiss and the Close button all end in dialog.close().
+    act(() => (dialog as HTMLDialogElement).close());
+    await waitFor(() => expect(window.location.search).toBe('?film=4'));
+    expect(dialog).not.toHaveAttribute('open');
+  });
+
+  it('a deep link opens the modal once films load; closing keeps the film and focuses its log button', async () => {
+    window.history.replaceState(null, '', '/?film=4&log=4');
+    render(<App />);
+
+    const dialog = await screen.findByRole('dialog', { name: 'Viewing log — A New Hope' });
+    expect(dialog).toHaveAttribute('open');
+
+    act(() => (dialog as HTMLDialogElement).close());
+    expect(window.location.search).toBe('?film=4');
+    expect(screen.getByRole('button', { name: 'Viewing log for A New Hope' })).toHaveFocus();
+  });
+
+  it('removes an unknown log value from the URL', async () => {
+    window.history.replaceState(null, '', '/?film=4&log=99');
+    render(<App />);
+    await waitFor(() => expect(window.location.search).toBe('?film=4'));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('shows the viewing count on the log button after adding one', async () => {
+    window.history.replaceState(null, '', '/?log=4');
+    render(<App />);
+    await screen.findByRole('dialog');
+
+    fireEvent.change(screen.getByLabelText('Date (required)'), { target: { value: '2026-11-12' } });
+    fireEvent.change(screen.getByLabelText('Time (required)'), { target: { value: '20:30' } });
+    await userEvent.click(screen.getByRole('button', { name: 'Add viewing' }));
+
+    act(() => (screen.getByRole('dialog') as HTMLDialogElement).close());
+    expect(
+      screen.getByRole('button', { name: 'Viewing log for A New Hope, 1 viewing' }),
+    ).toBeInTheDocument();
+  });
 });

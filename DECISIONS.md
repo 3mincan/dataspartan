@@ -243,3 +243,24 @@ Entries tagged *Assumption* must also appear in the README.
 - Consequences: scheduled after F4 so the modal and form are designed in
   the same pass; T7's audit runs on the final look.
 
+**D-032 — Native dialog details verified in Chrome** · Accepted
+- Context: three platform details surfaced while building the modal
+  (2026-11-12, Chrome 150 and jsdom).
+  1. React handles `autoFocus` by calling `focus()` on mount and never
+     writes the attribute; the date field mounts while the dialog is still
+     closed, so the call does nothing and `showModal()` finds no
+     `autofocus`.
+  2. After a light dismiss with no opener (deep link), focus stayed on the
+     hidden dialog, then fell to `<body>`: the outside press focuses the
+     dialog itself before `closedby` closes it.
+  3. jsdom has no `showModal()`/`close()`.
+- Decision: (1) set the real `autofocus` attribute in a ref callback, so
+  the browser applies it on every `showModal()`; (2) in `ui/Modal`'s `close`
+  handler, if focus is on `<body>` or inside the dialog, focus the film's log
+  button (an extension of the deep-link rule in DESIGN); (3) a minimal stub in
+  `src/test/setup.ts` that toggles `open` and fires `close`.
+- Consequences: Esc, Close button and outside click all return focus to the
+  log button (checked in Chrome). Focus containment, Esc and light dismiss
+  are not covered by unit tests; they are checked by hand, including the
+  Safari pointer fallback (owner).
+
