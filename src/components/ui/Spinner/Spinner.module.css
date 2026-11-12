@@ -1,0 +1,51 @@
+/* Ring drawn with a conic gradient and hollowed out with a radial mask
+   (the spinner guide's fallback path, which works in every engine). */
+.spinner {
+  --size: 2rem;
+  --thickness: 0.1875rem;
+
+  display: block;
+  inline-size: var(--size);
+  block-size: var(--size);
+  margin: var(--space-4) auto;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  background: conic-gradient(var(--color-accent) 0 40%, var(--color-border) 0);
+  mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - var(--thickness)),
+    black calc(100% - var(--thickness))
+  );
+  animation: spin 1s linear infinite;
+}
+
+.spinner::-webkit-progress-bar,
+.spinner::-webkit-progress-value {
+  display: none;
+}
+
+.spinner::-moz-progress-bar {
+  background: none;
+}
+
+/* Gradients are removed in forced-colors mode; draw with system colours. */
+@media (forced-colors: active) {
+  .spinner {
+    forced-color-adjust: none;
+    background: conic-gradient(CanvasText 0 40%, Canvas 0);
+  }
+}
+
+/* Slow down rather than stop, so activity is still visible (spinner guide). */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 6s;
+  }
+}
+
+@keyframes spin {
+  to {
+    rotate: 1turn;
+  }
+}

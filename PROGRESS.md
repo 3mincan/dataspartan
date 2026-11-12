@@ -20,7 +20,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T3 — Film list
+- **In progress:** T3 — Film list (owner keyboard check left)
 - **Next up:** T4 — Film details and cast
 - **Blocked:** —
 
@@ -60,16 +60,16 @@ Guides: `html`, `css-layout`, `responsive-design`, `size-aware-styling`, `dark-m
 
 ### T3 — Film list (GOAL F1)
 Guides: `accessibility`, `spinner`, `single-line-overflow`, `scrollability-affordance-hints`
-- [ ] `ui/Spinner` on indeterminate `<progress aria-label>`, reduced-motion aware
-- [ ] `ui/ErrorMessage` with `role="alert"` and a retry button
-- [ ] `FilmList` with `useFilms`: loading, error + retry
-- [ ] Entries as links (`<a href>`, `<episode> - <title>`); plain left click handled in-app (D-024)
-- [ ] Selected state with `aria-current="page"` and a non-colour cue
-- [ ] "Film not found" state for an unknown `film` value (D-027)
-- [ ] Viewing log button per row: sibling of the film link, `aria-haspopup="dialog"`,
+- [x] `ui/Spinner` on indeterminate `<progress aria-label>`, reduced-motion aware
+- [x] `ui/ErrorMessage` with `role="alert"` and a retry button
+- [x] `FilmList` with `useFilms`: loading, error + retry
+- [x] Entries as links (`<a href>`, `<episode> - <title>`); plain left click handled in-app (D-024)
+- [x] Selected state with `aria-current="page"` and a non-colour cue
+- [x] "Film not found" state for an unknown `film` value (D-027)
+- [x] Viewing log button per row: sibling of the film link, `aria-haspopup="dialog"`,
       accessible name includes the film title
-- [ ] Announce "Showing <film title>" on selection
-- [ ] Component test with `axe-core` run
+- [x] Announce "Showing <film title>" on selection
+- [x] Component test with `axe-core` run
 
 ### T4 — Film details and cast (GOAL F2)
 Guides: `css-layout`, `size-aware-styling`, `accessibility`
@@ -154,7 +154,8 @@ Manual accessibility (record browser / assistive tech / date in the Log)
 - [ ] 320 CSS px width: no horizontal scroll (1.4.10)
 - [ ] Text-spacing override: no clipped or overlapping text (1.4.12)
 - [ ] Increased OS text size respected
-- [ ] `prefers-reduced-motion`: no spinning or transitions beyond a fade
+- [ ] `prefers-reduced-motion`: spinner slows to one turn per 6 s (spinner guide:
+      slow, not stop, so activity stays visible); no other motion beyond a fade
 - [ ] Forced-colors mode: selection, focus and errors still distinguishable
 - [ ] Touch: targets ≥ 24×24 CSS px; modal closes by tapping outside (2.5.8)
 - [ ] Portrait and landscape both usable (1.3.4)
@@ -211,6 +212,19 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — T3: `ui/Spinner`, `ui/ErrorMessage`, `FilmList` (links,
+  `aria-current`, bar + bold selection cue, log button per row), main-zone
+  heading and "Film not found", "Showing …" announcement derived from the
+  URL. Tests: FilmList (states, click handling, axe) and App (select,
+  not found, retry). Checked in Chrome against the real API: 6 films sorted,
+  select → URL/title/heading/announcement, Back restores, `?film=99` shows
+  not found, no console errors. Spinner keeps the guide's ring and
+  reduced-motion slow-down but drops the `@property` dash animation
+  (simpler; T7 reduced-motion item reworded to match the guide). No
+  truncation (titles wrap) and no scroll hints (6 items). Guides: `spinner`,
+  `single-line-overflow`, `scrollability-affordance-hints`, `accessibility`.
+  Next: owner keyboard check, then T4.
 
 - 2026-11-12 — Owner checked T2 in the browser: nav stacks below 720px,
   no horizontal scroll at 320 px / 400% zoom, light scheme readable.

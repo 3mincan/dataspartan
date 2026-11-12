@@ -83,7 +83,8 @@ To build: the remaining components, their styles and tests, README.
 
 ```
 App
-├─ FilmList            films, selectedFilmId, onSelect, onOpenLog, viewingCount(filmId)
+├─ FilmList            films (AsyncResult<Film[]>), selectedFilmId, onSelect, onOpenLog,
+│                      viewingCount(filmId) (added in T6)
 ├─ FilmDetails         film
 │  ├─ CastList         filmId, cast (AsyncResult<Person[]>), selectedId, onSelect
 │  └─ CharacterCard    details (AsyncResult<CharacterDetails>)
