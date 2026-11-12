@@ -1,64 +1,83 @@
+/*
+ * Global tokens and base styles. Component styles live in CSS Modules.
+ *
+ * Every text pair is ≥ 4.5:1 and every border/focus pair ≥ 3:1 in both
+ * schemes (checked numerically; see DECISIONS.md D-029).
+ */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #121418;
+  --color-surface-light: #f3f4f6;
+  --color-surface-dark: #1b1e24;
+  --color-text-light: #16181d;
+  --color-text-dark: #eceef2;
+  --color-muted-light: #4b5260;
+  --color-muted-dark: #a9b0bd;
+  --color-border-light: #7a8190;
+  --color-border-dark: #808796;
+  --color-accent-light: #1f4fd1;
+  --color-accent-dark: #8fb2ff;
+  --color-selected-light: #e3eafc;
+  --color-selected-dark: #22314f;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* light-dark() is only "newly available" Baseline; the media query is the
+     fallback the dark-mode guide requires, light-dark() overrides it. */
+  --color-bg: var(--color-bg-light);
+  --color-surface: var(--color-surface-light);
+  --color-text: var(--color-text-light);
+  --color-muted: var(--color-muted-light);
+  --color-border: var(--color-border-light);
+  --color-accent: var(--color-accent-light);
+  --color-selected: var(--color-selected-light);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  @media (prefers-color-scheme: dark) {
+    --color-bg: var(--color-bg-dark);
+    --color-surface: var(--color-surface-dark);
+    --color-text: var(--color-text-dark);
+    --color-muted: var(--color-muted-dark);
+    --color-border: var(--color-border-dark);
+    --color-accent: var(--color-accent-dark);
+    --color-selected: var(--color-selected-dark);
+  }
+
+  @supports (color: light-dark(white, black)) {
+    --color-bg: light-dark(var(--color-bg-light), var(--color-bg-dark));
+    --color-surface: light-dark(var(--color-surface-light), var(--color-surface-dark));
+    --color-text: light-dark(var(--color-text-light), var(--color-text-dark));
+    --color-muted: light-dark(var(--color-muted-light), var(--color-muted-dark));
+    --color-border: light-dark(var(--color-border-light), var(--color-border-dark));
+    --color-accent: light-dark(var(--color-accent-light), var(--color-accent-dark));
+    --color-selected: light-dark(var(--color-selected-light), var(--color-selected-dark));
+  }
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  --radius: 0.375rem;
+  --focus-ring: 0.1875rem solid var(--color-accent);
+  --target-min: 1.5rem; /* 24 CSS px, WCAG 2.5.8 */
+
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  accent-color: var(--color-accent);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (pointer: coarse) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+    --target-min: 2.75rem;
   }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -67,45 +86,31 @@ body {
 }
 
 h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+h2,
+h3 {
+  line-height: 1.2;
+  text-wrap: balance;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+a {
+  color: var(--color-accent);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 0.125rem;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Hides content visually but keeps it in the accessibility tree. Focusable
+   content inside becomes visible again (skip link). */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
 }

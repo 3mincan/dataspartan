@@ -208,3 +208,16 @@ Entries tagged *Assumption* must also appear in the README.
   `eslint-plugin-jsx-a11y-x` (less known, harder to justify).
 - Consequences: dev-only; no runtime impact. Remove the override once
   the plugin publishes an ESLint 10 peer range.
+
+**D-029 — Colour palette and app name** · Accepted
+- Context: D-021 needs text ≥ 4.5:1 and borders/focus ≥ 3:1 in both
+  colour schemes; the page title needs an app name.
+- Decision: a neutral grey palette with one blue accent, defined as raw
+  light/dark custom properties in `src/index.css`, combined with
+  `light-dark()` and a `prefers-color-scheme` fallback (`light-dark()` is
+  only newly available Baseline). Every pair (text, muted, accent on bg,
+  surface and selected; border on the same) was computed with the WCAG
+  formula on 2026-11-12; the tightest is 3.25:1 (light border on
+  selected). App name: "Star Wars Films".
+- Consequences: any new colour pair must be checked the same way before use.
+

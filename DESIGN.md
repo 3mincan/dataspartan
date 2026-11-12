@@ -33,19 +33,24 @@ src/
   utils/
     character.ts           isDroid, HUMAN_FALLBACK, formatValue
     url.ts                 ViewState, parse/serialise, toHref, personIdFromUrl, isPlainLeftClick
+    title.ts               APP_NAME, pageTitle (document.title per view)
   components/
     FilmList/              side nav; per row: film link + log button
     FilmDetails/           heading, opening crawl, cast section
     CastList/
     CharacterCard/         RobotCard / OrganicCard by `details.kind`
     ViewingLogModal/       list + add form + delete
-    ui/                    Spinner, ErrorMessage (with retry), Modal
-  App.tsx
+    ui/                    Announcer, Spinner, ErrorMessage (with retry), Modal
+  test/setup.ts            jest-dom matchers, cleanup between tests
+  index.css                colour tokens, base styles, .visually-hidden
+  App.tsx                  shell (skip link, nav, main, announcer), title
+  App.module.css
   main.tsx
 ```
 
-Already implemented: everything under `api/`, `hooks/`, `utils/`.
-To build: `components/`, `App.tsx`, styles, tests, README.
+Already implemented: everything under `api/`, `hooks/`, `utils/`, the app
+shell, base styles and `ui/Announcer`.
+To build: the remaining components, their styles and tests, README.
 
 ## Layout
 
@@ -243,8 +248,9 @@ Guidance `accessibility` guide.
 - Landmarks: `<nav aria-label="Films">` and exactly one `<main id="main">`.
   One `<h1>`; `<h2>` for "Films", "Opening crawl", "Cast", character name;
   no skipped levels (1.3.1, 2.4.6).
-- Skip link "Skip to film details" as the first focusable element, targeting
-  the main heading (`tabindex="-1"`), visible on focus (2.4.1, D-022).
+- Skip link "Skip to main content" as the first focusable element, targeting
+  the main heading (worded generically because the main zone is not always
+  film details: empty prompt, not-found) (`tabindex="-1"`), visible on focus (2.4.1, D-022).
 - Lists are real lists: films, cast and viewings as `<ul>`/`<ol>`; character
   label/value pairs as `<dl>` (1.3.1).
 - DOM order equals visual order; no positive `tabindex` (1.3.2, 2.4.3).

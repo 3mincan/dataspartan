@@ -20,7 +20,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T2 — App shell and base styles
+- **In progress:** T2 — App shell and base styles (owner browser check left)
 - **Next up:** T3 — Film list
 - **Blocked:** —
 
@@ -42,21 +42,22 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ### T2 — App shell and base styles
 Guides: `html`, `css-layout`, `responsive-design`, `size-aware-styling`, `dark-mode`, `accessibility`
-- [ ] Run `guidance:scan` on the Vite template files; note findings
-- [ ] Remove Vite template content (`App.css`, logos, counter)
-- [ ] `index.html`: `lang="en"`, meaningful `<title>`, `<meta name="color-scheme" content="light dark">`
-- [ ] Skip link to the main heading, visible on focus (D-022)
-- [ ] `ui/Announcer`: single polite live region in `App`
-- [ ] `.visually-hidden` utility
-- [ ] Tokens: `color-scheme: light dark` on `:root`, colours via `light-dark()`, spacing scale;
+- [x] Run `guidance:scan` on the Vite template files; note findings
+- [x] Remove Vite template content (`App.css`, logos, counter)
+- [x] `index.html`: `lang="en"`, meaningful `<title>`, `<meta name="color-scheme" content="light dark">`
+- [x] Skip link to the main heading, visible on focus (D-022)
+- [x] `ui/Announcer`: single polite live region in `App`
+- [x] `.visually-hidden` utility
+- [x] Tokens: `color-scheme: light dark` on `:root`, colours via `light-dark()`, spacing scale;
       every text pair ≥ 4.5:1 and every UI/focus pair ≥ 3:1 in both schemes
-- [ ] Base styles: `:focus-visible` outline, minimum 24×24 px targets, `rem`-based sizes
-- [ ] Shell: Grid, `100dvh`, labelled `<nav>` + single `<main>`, independent scrolling
-- [ ] Stack side nav above main below ~720px; no horizontal scroll at 320 CSS px
-- [ ] Empty main zone prompt when no film is selected
-- [ ] `App` reads the view from `useUrlState()`; no selection state in React (D-023)
-- [ ] `document.title` follows the view
-- [ ] Tests: `utils/url`, `useUrlState`
+- [x] Base styles: `:focus-visible` outline, minimum 24×24 px targets, `rem`-based sizes
+- [x] Shell: Grid, `100dvh`, labelled `<nav>` + single `<main>`, independent scrolling
+- [~] Stack side nav above main below ~720px; no horizontal scroll at 320 CSS px
+      (CSS in place; owner to check at 320 px and 400% zoom)
+- [x] Empty main zone prompt when no film is selected
+- [x] `App` reads the view from `useUrlState()`; no selection state in React (D-023)
+- [x] `document.title` follows the view
+- [x] Tests: `utils/url`, `useUrlState`
 
 ### T3 — Film list (GOAL F1)
 Guides: `accessibility`, `spinner`, `single-line-overflow`, `scrollability-affordance-hints`
@@ -211,6 +212,14 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — T2: shell, tokens (D-029), skip link, Announcer, `pageTitle`;
+  tests for `utils/url`, `useUrlState` (incl. Back/Forward and both
+  close-log paths), `pageTitle`, Announcer, App shell (axe clean). Template
+  scan: 0 findings. Checked in Chrome (dark scheme) against the real API:
+  title follows `?film=4`, skip link visible on focus and focuses the h1,
+  no console errors. Guides: `html`, `css-layout`, `responsive-design`,
+  `dark-mode`, `accessibility`. Next: owner check of narrow layout, then T3.
 
 - 2026-11-12 — Verified swapi.dev with curl: films list (`episode_id`,
   `opening_crawl`, `characters` URLs), people 1 (`species: []`) and 2
