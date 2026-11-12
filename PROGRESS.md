@@ -21,7 +21,7 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 ## Current
 
 - **In progress:** T6 — Viewing log
-- **Next up:** T7 — Quality pass and WCAG 2.2 AA audit
+- **Next up:** T6.5 — Visual design pass
 - **Blocked:** —
 
 ## Tasks
@@ -116,6 +116,20 @@ Guides: `dialog`, `prevent-page-scroll-under-modal-dialog`, `platform-controls-d
       backdrop does not close
 - [ ] Tests: `useViewingLog`, modal validation / add / delete / focus after delete
       (stub `showModal` in jsdom), `axe-core` run
+
+### T6.5 — Visual design pass (D-031)
+Guides: search `typography`, `color`, `css-layout` before starting
+- [ ] Design direction: one subject-based idea applied consistently; crawl
+      styled after the Star Wars yellow-on-black identity without copying
+      the logo or the 3D scrolling crawl
+- [ ] Typography scale (system font stack unless a font decision is recorded)
+- [ ] Spacing on a consistent grid
+- [ ] One accent colour; tokens updated in `src/index.css`
+- [ ] Avoid: purple/blue gradients, glassmorphism, everything in rounded
+      cards, emoji, stacked shadows
+- [ ] CSS only, no new dependencies, through the colour tokens
+- [ ] Contrast of every new colour pair computed in both schemes (update D-029)
+- [ ] Owner check: both schemes, narrow and wide, modal open
 
 ### T7 — Quality pass and WCAG 2.2 AA audit
 Guides: `accessibility`, `performance`, `security`, `respect-os-text-scale`
@@ -213,6 +227,8 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-12 — Owner added a visual design pass after T6 (T6.5, D-031).
 
 - 2026-11-12 — Owner check of T5: droid and non-droid cards correct,
   badge and labels readable in the light scheme, card fine narrow and wide.

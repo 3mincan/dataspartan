@@ -229,3 +229,17 @@ Entries tagged *Assumption* must also appear in the README.
   re-fetches only the failed requests because successful ones stay cached
   (`fetchJson` caches each promise and evicts only failed entries).
 - Consequences: simplest code; a transient failure costs one retry click.
+
+**D-031 — Visual design pass after the core features** · Accepted
+- Context: the owner finds the functional styling plain. The brief asks for
+  a "simple application", so the look should be deliberate, not elaborate.
+- Decision: after T6, one design pass (PROGRESS T6.5). One subject-based
+  idea used consistently: the opening crawl leans on the Star Wars
+  yellow-on-black identity without copying the logo or the 3D crawl; a
+  clear type scale, spacing on a grid, one accent colour. Avoid purple/blue
+  gradients, glassmorphism, cards around everything, emoji and stacked
+  shadows. CSS only, no new dependencies, through the existing tokens;
+  every new colour pair is contrast-checked in both schemes.
+- Consequences: scheduled after F4 so the modal and form are designed in
+  the same pass; T7's audit runs on the final look.
+
