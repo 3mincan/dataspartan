@@ -60,8 +60,6 @@
   /* Type scale. Headings are fluid but capped at 1.5x their minimum, so
      browser zoom can still reach 200% (responsive-design guide, WCAG 1.4.4). */
   --text-label: 0.75rem;
-  --text-body: 1rem;
-  --text-lead: 1.125rem;
   --text-title: clamp(1.5rem, 1.25rem + 1vw, 2rem);
   --text-display: clamp(2rem, 1.5rem + 2vw, 3rem);
   --tracking-label: 0.2em;
@@ -138,7 +136,8 @@ a {
 }
 
 /* Small, letter-spaced uppercase label: section headings, field names,
-   badges. Uppercase is visual only; screen readers get the source text. */
+   badges. Chrome exposes the uppercase text in accessible names too ("FILMS");
+   names still contain the visible text (D-035). */
 .label {
   font-size: var(--text-label);
   font-weight: 600;

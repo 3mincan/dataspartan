@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export type AsyncState<T> =
+type AsyncState<T> =
   | { status: 'idle'; data?: undefined; error?: undefined }
   | { status: 'loading'; data?: undefined; error?: undefined }
   | { status: 'success'; data: T; error?: undefined }

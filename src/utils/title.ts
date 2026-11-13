@@ -1,6 +1,6 @@
 export const APP_NAME = 'Star Wars Films';
 
-export interface TitleParts {
+interface TitleParts {
   filmTitle?: string | null;
   characterName?: string | null;
   logFilmTitle?: string | null;

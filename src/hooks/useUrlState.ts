@@ -70,7 +70,7 @@ function closeLog(): void {
   }
 }
 
-export interface UrlState {
+interface UrlState {
   view: ViewState;
   selectFilm: (filmId: number) => void;
   selectCharacter: (characterId: number) => void;

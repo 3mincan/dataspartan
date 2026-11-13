@@ -233,6 +233,11 @@ Ideas and findings outside the current task. Not committed scope.
 
 Newest first. One or two lines per session: what was done, what is next.
 
+- 2026-11-13 — A–Z code review at the owner's request: removed unused type
+  fields, tokens and exports, fixed two misleading comments, unified style,
+  ignored `.env*`, added `Modal`/`ErrorMessage`/`Spinner` tests (D-036).
+  116 tests. Next: T8 (README still the Vite template).
+
 - 2026-11-13 — T7 audit by the agent at the owner's request ("tam
   yetkilisin"), dev build, headless Chrome 157 via DevTools Protocol plus
   Chrome 156 (macOS) via the extension. URLs: the five DESIGN examples load

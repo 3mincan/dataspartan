@@ -328,3 +328,23 @@ Entries tagged *Assumption* must also appear in the README.
   ("CLOSE", "FILMS"); this is accepted (names still contain the visible
   text, 2.5.3). Screen reader runs still need a person.
 
+**D-036 — Code review cleanup before delivery** · Accepted
+- Context: full A–Z read of the code on 2026-11-13, plus scripted checks
+  for unused exports, CSS module classes and custom properties
+  (`noUnusedLocals`/`noUnusedParameters` already cover locals and imports).
+- Decision: remove what nothing reads — `Film.release_date`,
+  `Paginated.count`/`previous`, the `--text-body`/`--text-lead` tokens
+  (so D-033's type scale is label, title, display and the inherited body
+  size), the `EMPTY_VIEW` export (moved into its test), and the `export` on
+  `AsyncState`, `UrlState`, `TitleParts`. Resource `url` fields stay as each
+  resource's identity. Kept on purpose: `clearCache` (test seam for the
+  module-level cache), `loadCharacterDetails` and `SwapiError` exports
+  (tested directly), the `initial` argument of `useViewingLog` (test seam).
+  Also: the template files use the project's semicolon style, a misleading
+  `vite.config.ts` comment and a wrong `.label` comment are fixed, `.env*`
+  is ignored, the favicon uses the accent yellow, and `Modal`,
+  `ErrorMessage` and `Spinner` get the test files the folder convention
+  asks for.
+- Consequences: no behaviour change. The Vite template `README.md` is
+  replaced in T8.
+

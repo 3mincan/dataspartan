@@ -8,7 +8,6 @@ const film: Film = {
   title: 'A New Hope',
   episode_id: 4,
   opening_crawl: 'It is a period of civil war.\r\nRebel spaceships, striking',
-  release_date: '1977-05-25',
   characters: [],
   url: 'https://swapi.dev/api/films/1/',
 };

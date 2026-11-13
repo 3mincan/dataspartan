@@ -10,7 +10,6 @@ const film = (episode_id: number, title: string): Film => ({
   title,
   episode_id,
   opening_crawl: '',
-  release_date: '',
   characters: [],
   url: `https://swapi.dev/api/films/${episode_id}/`,
 });

@@ -1,12 +1,12 @@
-import '@testing-library/jest-dom/vitest'
-import { cleanup } from '@testing-library/react'
-import { afterEach } from 'vitest'
+import '@testing-library/jest-dom/vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach } from 'vitest';
 
 // Testing Library only auto-cleans when the runner exposes global afterEach;
 // Vitest globals are off, so unmount explicitly between tests.
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});
 
 // jsdom has no <dialog> API (checked 2026-11-12). This stand-in covers only
 // what the app relies on: `showModal()` opens, `close()` closes and fires

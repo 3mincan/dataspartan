@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { CharacterDetails, OrganicDetails, RobotDetails } from '../../api/types';
 import type { AsyncResult } from '../../hooks/useAsync';
 import { formatValue } from '../../utils/character';
@@ -12,7 +13,7 @@ interface CharacterCardProps {
 }
 
 export function CharacterCard({ name, details }: CharacterCardProps) {
-  let body;
+  let body: ReactNode;
   switch (details.status) {
     case 'idle':
     case 'loading':

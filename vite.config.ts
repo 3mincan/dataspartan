@@ -1,5 +1,5 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
-    // Tests must never reach swapi.dev; each test mocks fetch or src/api/swapi.
+    // Undo vi.spyOn / vi.fn mocks after each test so they never leak.
     restoreMocks: true,
   },
-})
+});

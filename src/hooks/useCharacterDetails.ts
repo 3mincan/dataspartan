@@ -34,6 +34,7 @@ export async function loadCharacterDetails(personUrl: string): Promise<Character
 /** Resolves the detail view model for the selected cast entry. */
 export function useCharacterDetails(personUrl: string | null): AsyncResult<CharacterDetails> {
   return useAsync(personUrl, async () => {
+    // Never runs with a null key (useAsync stays idle); narrows the type.
     if (!personUrl) throw new Error('No character selected.');
     return loadCharacterDetails(personUrl);
   });

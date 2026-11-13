@@ -1,10 +1,9 @@
-/** Raw SWAPI resources (only the fields the app uses). */
+/** Raw SWAPI resources: only the fields the app reads, plus each resource's `url`. */
 
 export interface Film {
   title: string;
   episode_id: number;
   opening_crawl: string;
-  release_date: string;
   /** URLs of the people appearing in the film. */
   characters: string[];
   url: string;
@@ -37,9 +36,7 @@ export interface Planet {
 }
 
 export interface Paginated<T> {
-  count: number;
   next: string | null;
-  previous: string | null;
   results: T[];
 }
 

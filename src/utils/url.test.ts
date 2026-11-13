@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  EMPTY_VIEW,
   isPlainLeftClick,
   parseViewState,
   personIdFromUrl,
@@ -8,6 +7,8 @@ import {
   toSearch,
   type ViewState,
 } from './url';
+
+const EMPTY_VIEW: ViewState = { filmId: null, characterId: null, logFilmId: null };
 
 describe('parseViewState / toSearch', () => {
   it.each<[string, ViewState]>([

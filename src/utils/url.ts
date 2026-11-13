@@ -12,8 +12,6 @@ export interface ViewState {
   logFilmId: number | null;
 }
 
-export const EMPTY_VIEW: ViewState = { filmId: null, characterId: null, logFilmId: null };
-
 function readId(params: URLSearchParams, key: string): number | null {
   const raw = params.get(key);
   if (raw === null || !/^[1-9]\d*$/.test(raw)) return null;
