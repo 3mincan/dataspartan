@@ -262,7 +262,7 @@ Guidance `accessibility` guide.
 
 - `<html lang="en">`; `document.title` describes the current view and
   updates on every navigation (3.1.1, 2.4.2).
-- Landmarks: `<nav aria-label="Films">` and exactly one `<main id="main">`.
+- Landmarks: `<nav>` named by its "Films" heading and exactly one `<main>`.
   One `<h1>`; `<h2>` for "Films", "Opening crawl", "Cast", character name;
   no skipped levels (1.3.1, 2.4.6).
 - Skip link "Skip to main content" as the first focusable element, targeting
@@ -304,7 +304,8 @@ Guidance `accessibility` guide.
   next delete button, else the previous one, else the date field. After the
   modal closes the browser returns focus to the log button; verify, do not
   re-implement.
-- Focus indicator: `:focus-visible` with a 2px+ `outline` and offset,
+- Focus indicator: `:focus-visible` (plus `:focus` on text fields, D-035)
+  with a 2px+ `outline` and offset,
   contrast ≥ 3:1 against adjacent colours (2.4.7, 1.4.11).
 - Focused elements are never hidden behind sticky or scrolling chrome; use
   `scroll-padding` where a region scrolls under a sticky header (2.4.11).
@@ -315,8 +316,8 @@ Guidance `accessibility` guide.
 
 - Each field has a visible `<label for>`; required fields say so in text
   ("Date (required)"), not only with an asterisk or colour (3.3.2, 1.3.1).
-- Errors are identified in text next to the field and say how to fix them
-  ("Enter the date you watched the film.") (3.3.1, 3.3.3).
+- Errors are identified in text next to the field and name the field and
+  what is missing ("Date is required.") (3.3.1, 3.3.3).
 - `aria-invalid` and `aria-describedby` follow the `:user-invalid` state;
   on a failed submit focus lands on the first invalid field (native
   validation does this).
@@ -336,7 +337,9 @@ Guidance `accessibility` guide.
 - Motion: spinner and any transitions honour `prefers-reduced-motion`;
   nothing flashes (2.3.1).
 - Forced-colors mode: borders/outlines, not background colour alone, carry
-  selection and focus.
+  selection and focus. The selection bar is `Canvas` when unselected and
+  `Highlight` when selected, because forced colors paints transparent
+  borders too (D-035).
 
 ### Security note
 

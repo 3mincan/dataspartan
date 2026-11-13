@@ -28,3 +28,16 @@
 .empty {
   color: var(--color-muted);
 }
+
+/* Forced colors paints every border, the transparent ones too, so the bar
+   would mark every row. Hide it with the background colour and draw the
+   selected one in Highlight (D-035). */
+@media (forced-colors: active) {
+  .link {
+    border-inline-start-color: Canvas;
+  }
+
+  .link[aria-current='true'] {
+    border-inline-start-color: Highlight;
+  }
+}

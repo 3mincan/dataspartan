@@ -114,7 +114,11 @@ a {
   color: var(--color-accent);
 }
 
-:focus-visible {
+/* Text fields always show the ring, as browsers do by default. Without this
+   the date field focused by `autofocus` after a mouse click or a deep link
+   had no visible ring in Chrome (D-035). */
+:focus-visible,
+:is(input, textarea):focus {
   outline: var(--focus-ring);
   outline-offset: 0.125rem;
 }

@@ -1,7 +1,7 @@
 import axe from 'axe-core';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import type { Film, Viewing } from '../../api/types';
 import { useViewingLog } from '../../hooks/useViewingLog';
 import { ViewingLogModal } from './ViewingLogModal';
@@ -82,6 +82,32 @@ describe('ViewingLogModal', () => {
 
     expect(screen.getByText('No viewings recorded yet.')).toBeInTheDocument();
     expect(screen.getByLabelText('Time (required)')).toBeInvalid();
+  });
+
+  it('marks every empty required field invalid after one failed submit', () => {
+    // jsdom has no :user-invalid; after a submit attempt it equals "invalid".
+    const matches = HTMLElement.prototype.matches;
+    vi.spyOn(HTMLElement.prototype, 'matches').mockImplementation(function (
+      this: HTMLElement,
+      selector: string,
+    ) {
+      if (selector === ':user-invalid' && this instanceof HTMLInputElement) return !this.validity.valid;
+      return matches.call(this, selector);
+    });
+    render(<Harness />);
+    const date = screen.getByLabelText(/^Date/);
+    const time = screen.getByLabelText(/^Time/);
+
+    // The browser fires `invalid` on both fields in the same task.
+    act(() => {
+      date.dispatchEvent(new Event('invalid', { cancelable: true }));
+      time.dispatchEvent(new Event('invalid', { cancelable: true }));
+    });
+
+    expect(date).toHaveAttribute('aria-invalid', 'true');
+    expect(date).toHaveAccessibleDescription('Date is required.');
+    expect(time).toHaveAttribute('aria-invalid', 'true');
+    expect(time).toHaveAccessibleDescription('Time is required.');
   });
 
   it('adds a viewing, resets the form, keeps the dialog open and announces it', async () => {

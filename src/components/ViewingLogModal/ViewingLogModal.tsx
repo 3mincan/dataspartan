@@ -113,7 +113,11 @@ function ViewingLog({ film, viewings, onAdd, onRemove }: ViewingLogProps) {
         ERROR_ANNOUNCE_DELAY_MS,
       );
     }
-    if (invalid[field] !== isInvalid) setInvalid({ ...invalid, [field]: isInvalid });
+    // Functional update: a failed submit fires `invalid` on both fields in the
+    // same tick, and spreading the render's `invalid` would drop the first one.
+    setInvalid((current) =>
+      current[field] === isInvalid ? current : { ...current, [field]: isInvalid },
+    );
   };
 
   const fieldProps = (field: RequiredField) => ({

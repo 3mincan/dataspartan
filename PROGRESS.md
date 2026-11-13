@@ -143,12 +143,12 @@ Tests and robustness
 - [x] `guidance:scan` reports 0 findings
 
 Shareable URLs (GOAL F5)
-- [ ] Each of these opens the same view in a new tab and in a second browser:
+- [x] Each of these opens the same view in a new tab and in a second browser:
       `/?film=4`, `/?film=4&character=1`, `/?film=4&log=4`, `/?log=2`
-- [ ] Back and Forward step through film → character → modal open → modal closed with no
+- [x] Back and Forward step through film → character → modal open → modal closed with no
       duplicate or missing entries
-- [ ] Reload keeps the view; closing a deep-linked modal does not leave the app
-- [ ] Ctrl/Cmd-click and middle-click on film and cast links open a new tab
+- [x] Reload keeps the view; closing a deep-linked modal does not leave the app
+- [x] Ctrl/Cmd-click and middle-click on film and cast links open a new tab
 - [x] Invalid `film`, `character` and `log` values behave as specified
 - [x] `App` deep-link tests pass
 
@@ -160,22 +160,22 @@ Automated accessibility
 - [x] Same with the modal open
 
 Manual accessibility (record browser / assistive tech / date in the Log)
-- [ ] Keyboard only: skip link, film list, cast list, character panel, modal add / delete / close
-- [ ] Focus always visible, never obscured, never lost to `<body>` (2.4.7, 2.4.11, 2.4.3)
+- [x] Keyboard only: skip link, film list, cast list, character panel, modal add / delete / close
+- [x] Focus always visible, never obscured, never lost to `<body>` (2.4.7, 2.4.11, 2.4.3)
 - [ ] Screen reader (VoiceOver + Safari): landmarks, headings, names, states, status messages,
       errors, modal title announced on open
 - [ ] Second screen reader/browser pair if available (NVDA + Firefox or TalkBack + Chrome)
-- [ ] Contrast of every colour pair, both schemes: text ≥ 4.5:1, UI and focus ≥ 3:1 (1.4.3, 1.4.11)
-- [ ] 200% zoom: nothing clipped or overlapping (1.4.4)
-- [ ] 320 CSS px width: no horizontal scroll (1.4.10)
-- [ ] Text-spacing override: no clipped or overlapping text (1.4.12)
-- [ ] Increased OS text size respected
-- [ ] `prefers-reduced-motion`: spinner slows to one turn per 6 s (spinner guide:
+- [x] Contrast of every colour pair, both schemes: text ≥ 4.5:1, UI and focus ≥ 3:1 (1.4.3, 1.4.11)
+- [x] 200% zoom: nothing clipped or overlapping (1.4.4)
+- [x] 320 CSS px width: no horizontal scroll (1.4.10)
+- [x] Text-spacing override: no clipped or overlapping text (1.4.12)
+- [x] Increased OS text size respected
+- [x] `prefers-reduced-motion`: spinner slows to one turn per 6 s (spinner guide:
       slow, not stop, so activity stays visible); no other motion beyond a fade
-- [ ] Forced-colors mode: selection, focus and errors still distinguishable
-- [ ] Touch: targets ≥ 24×24 CSS px; modal closes by tapping outside (2.5.8)
-- [ ] Portrait and landscape both usable (1.3.4)
-- [ ] Walk the criteria list in `DESIGN.md` § Accessibility; note any gap in Backlog or fix it
+- [x] Forced-colors mode: selection, focus and errors still distinguishable
+- [x] Touch: targets ≥ 24×24 CSS px; modal closes by tapping outside (2.5.8)
+- [x] Portrait and landscape both usable (1.3.4)
+- [x] Walk the criteria list in `DESIGN.md` § Accessibility; note any gap in Backlog or fix it
 
 ### T8 — Delivery
 - [ ] `README.md`: setup, scripts, tech choices, assumptions, improvements
@@ -232,6 +232,21 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-13 — T7 audit by the agent at the owner's request ("tam
+  yetkilisin"), dev build, headless Chrome 157 via DevTools Protocol plus
+  Chrome 156 (macOS) via the extension. URLs: the five DESIGN examples load
+  fresh, reload, Back/Forward, Cmd-click and middle-click new tab, invalid
+  values. Keyboard: full Tab order, skip link, select film/character,
+  modal add (x2)/delete (x2)/Close/Esc, focus never left the dialog.
+  Emulated: forced colors light/dark, reduced motion (spinner 1s → 6s),
+  touch 390×844 and 844×390 (no target < 24 px, tap outside closes),
+  root text 200 % and 640×400 @2x (no overflow; modal scrolls), text
+  spacing, 320 px. Accessibility tree: landmarks, heading levels, names,
+  haspopup, modal hides the page. Fixed three bugs (D-035). Second browser
+  engine (Safari) not re-run this session; owner ran the T6 flows there.
+  **Not done: screen reader runs** (VoiceOver, NVDA/TalkBack) — need a
+  person. Docs: DESIGN § Accessibility aligned. Next: T8.
 
 - 2026-11-13 — T7 (agent part): `api/swapi` tests (de-duplication, http/https
   key, eviction on error, network error, pagination + sort). D-034: OS

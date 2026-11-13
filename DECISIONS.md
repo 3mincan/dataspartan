@@ -301,3 +301,30 @@ Entries tagged *Assumption* must also appear in the README.
   host serves the build; there is none in scope, so they go to the Backlog.
   The app has no dangerous DOM sinks: API text is rendered as React text.
 
+**D-035 — Fixes from the T7 browser audit** · Accepted
+- Context: on 2026-11-13 the agent drove the dev build in headless Chrome
+  157 over the DevTools Protocol (keyboard events, touch, media emulation,
+  the accessibility tree), and re-checked key points in Chrome 156. Scripts
+  were throwaway and are not part of the repo.
+- Findings and decisions:
+  1. After one failed submit only the time field got `aria-invalid` and its
+     error description; the date field showed the error visually only. Both
+     `invalid` events fire in the same task and the second `setInvalid`
+     spread a stale object. Fixed with a functional update; regression test
+     added.
+  2. Forced-colors mode paints transparent borders, so the selection bar
+     appeared on every film and cast row. Unselected bars are now `Canvas`,
+     the selected one `Highlight`.
+  3. The date field focused by `autofocus` (mouse click on the log button or
+     a deep link) had no visible ring, because `:focus-visible` did not
+     match. Text fields now also get the ring on `:focus`, as browsers do by
+     default. The date/time picker buttons are separate Tab stops; Chrome
+     draws its own ring around the picker icon.
+  4. Not an app bug: in headless Chrome 157 a `<dialog>` stops firing
+     `close` in every later document of a tab once Esc has closed one
+     (reproduced with a ten-line page). Chrome 156 does not do this.
+     No workaround added.
+- Consequences: accessible names in Chrome follow `text-transform`
+  ("CLOSE", "FILMS"); this is accepted (names still contain the visible
+  text, 2.5.3). Screen reader runs still need a person.
+
