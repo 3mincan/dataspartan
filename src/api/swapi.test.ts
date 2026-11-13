@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { clearCache, fetchJson, getFilms, personUrl, SwapiError } from './swapi';
+
+// The response cache lives at module level; a fresh module per test starts
+// it empty without a test-only export in the app code.
+let swapi: typeof import('./swapi');
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), { status });
@@ -7,8 +10,9 @@ function jsonResponse(body: unknown, status = 200): Response {
 
 const fetchMock = vi.fn<typeof fetch>();
 
-beforeEach(() => {
-  clearCache();
+beforeEach(async () => {
+  vi.resetModules();
+  swapi = await import('./swapi');
   vi.stubGlobal('fetch', fetchMock);
 });
 
@@ -21,10 +25,10 @@ it('de-duplicates concurrent requests and caches the result', async () => {
   fetchMock.mockResolvedValue(jsonResponse({ name: 'Luke' }));
 
   const [a, b] = await Promise.all([
-    fetchJson('https://swapi.dev/api/people/1/'),
-    fetchJson('https://swapi.dev/api/people/1/'),
+    swapi.fetchJson('https://swapi.dev/api/people/1/'),
+    swapi.fetchJson('https://swapi.dev/api/people/1/'),
   ]);
-  const c = await fetchJson('https://swapi.dev/api/people/1/');
+  const c = await swapi.fetchJson('https://swapi.dev/api/people/1/');
 
   expect(fetchMock).toHaveBeenCalledTimes(1);
   expect(a).toEqual({ name: 'Luke' });
@@ -35,8 +39,8 @@ it('de-duplicates concurrent requests and caches the result', async () => {
 it('treats http and https URLs from SWAPI as the same resource', async () => {
   fetchMock.mockResolvedValue(jsonResponse({ name: 'Luke' }));
 
-  await fetchJson('http://swapi.dev/api/people/1/');
-  await fetchJson('https://swapi.dev/api/people/1/');
+  await swapi.fetchJson('http://swapi.dev/api/people/1/');
+  await swapi.fetchJson('https://swapi.dev/api/people/1/');
 
   expect(fetchMock).toHaveBeenCalledTimes(1);
   expect(fetchMock).toHaveBeenCalledWith('https://swapi.dev/api/people/1/');
@@ -44,19 +48,19 @@ it('treats http and https URLs from SWAPI as the same resource', async () => {
 
 it('rejects with the status on a non-OK response and evicts it, so a retry refetches', async () => {
   fetchMock.mockResolvedValueOnce(jsonResponse({}, 404));
-  const error = await fetchJson('https://swapi.dev/api/people/999/').catch((e: unknown) => e);
-  expect(error).toBeInstanceOf(SwapiError);
+  const error = await swapi.fetchJson('https://swapi.dev/api/people/999/').catch((e: unknown) => e);
+  expect(error).toBeInstanceOf(swapi.SwapiError);
   expect(error).toMatchObject({ status: 404 });
 
   fetchMock.mockResolvedValueOnce(jsonResponse({ name: 'Found' }));
-  await expect(fetchJson('https://swapi.dev/api/people/999/')).resolves.toEqual({ name: 'Found' });
+  await expect(swapi.fetchJson('https://swapi.dev/api/people/999/')).resolves.toEqual({ name: 'Found' });
   expect(fetchMock).toHaveBeenCalledTimes(2);
 });
 
 it('wraps network failures in a SwapiError without a status', async () => {
   fetchMock.mockRejectedValueOnce(new TypeError('Failed to fetch'));
-  const error = await fetchJson('https://swapi.dev/api/films/').catch((e: unknown) => e);
-  expect(error).toBeInstanceOf(SwapiError);
+  const error = await swapi.fetchJson('https://swapi.dev/api/films/').catch((e: unknown) => e);
+  expect(error).toBeInstanceOf(swapi.SwapiError);
   expect(error).toMatchObject({ status: undefined });
 });
 
@@ -78,12 +82,12 @@ it('getFilms follows pagination and sorts by episode', async () => {
     );
   });
 
-  const films = await getFilms();
+  const films = await swapi.getFilms();
 
   expect(films.map((film) => film.episode_id)).toEqual([1, 3, 5]);
   expect(fetchMock).toHaveBeenCalledTimes(2);
 });
 
 it('personUrl builds the canonical resource URL', () => {
-  expect(personUrl(12)).toBe('https://swapi.dev/api/people/12/');
+  expect(swapi.personUrl(12)).toBe('https://swapi.dev/api/people/12/');
 });

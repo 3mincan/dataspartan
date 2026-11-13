@@ -84,8 +84,3 @@ export function getSpecies(url: string): Promise<Species> {
 export function getPlanet(url: string): Promise<Planet> {
   return fetchJson<Planet>(url);
 }
-
-/** Test helper. */
-export function clearCache(): void {
-  cache.clear();
-}

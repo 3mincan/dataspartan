@@ -337,9 +337,11 @@ Entries tagged *Assumption* must also appear in the README.
   (so D-033's type scale is label, title, display and the inherited body
   size), the `EMPTY_VIEW` export (moved into its test), and the `export` on
   `AsyncState`, `UrlState`, `TitleParts`. Resource `url` fields stay as each
-  resource's identity. Kept on purpose: `clearCache` (test seam for the
-  module-level cache), `loadCharacterDetails` and `SwapiError` exports
-  (tested directly), the `initial` argument of `useViewingLog` (test seam).
+  resource's identity. `clearCache` is removed too: it was the only
+  function the app never called; `swapi.test.ts` loads a fresh module per
+  test instead (`vi.resetModules`). Kept on purpose: the `loadCharacterDetails`
+  and `SwapiError` exports (the app uses both; tests import them directly)
+  and the `initial` argument of `useViewingLog` (test seam).
   Also: the template files use the project's semicolon style, a misleading
   `vite.config.ts` comment and a wrong `.label` comment are fixed, `.env*`
   is ignored, the favicon uses the accent yellow, and `Modal`,
