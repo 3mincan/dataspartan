@@ -362,6 +362,8 @@ Automated checks find only a part of WCAG issues; both columns are required.
 Minimum set:
 
 - `utils/character`: `isDroid`, `formatValue`.
+- `useAsync`: idle for a null key, loading → success, a superseded key's
+  result is never shown, error and retry.
 - `loadCharacterDetails`: droid, non-human organic, human fallback
   (mock `api/swapi`).
 - `api/swapi`: caching, concurrent de-duplication, eviction on failure,

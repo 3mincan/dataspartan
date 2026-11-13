@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T7 — Quality pass and WCAG 2.2 AA audit
-- **Next up:** T8 — README and delivery
+- **In progress:** T8 — Delivery (waits on T7 screen reader runs)
+- **Next up:** owner: VoiceOver + Safari run, then tick T7, GOAL Accessibility and T8
 - **Blocked:** —
 
 ## Tasks
@@ -178,12 +178,13 @@ Manual accessibility (record browser / assistive tech / date in the Log)
 - [x] Walk the criteria list in `DESIGN.md` § Accessibility; note any gap in Backlog or fix it
 
 ### T8 — Delivery
-- [ ] `README.md`: setup, scripts, tech choices, assumptions, improvements
-- [ ] README: URL scheme and the viewing-data sharing limit (D-026)
-- [ ] README accessibility section: WCAG 2.2 AA target, what was tested and with what, known gaps
+- [x] `README.md`: setup, scripts, tech choices, assumptions, improvements
+- [x] README: URL scheme and the viewing-data sharing limit (D-026)
+- [x] README accessibility section: WCAG 2.2 AA target, what was tested and with what, known gaps
 - [ ] All `GOAL.md` boxes ticked after verifying each in the running app
-- [ ] Final `lint`, `typecheck`, `test`, `build`, `guidance:scan`
-- [ ] Clean commit history; nothing unintended committed
+      (all but Accessibility, which waits for the screen reader runs in T7)
+- [x] Final `lint`, `typecheck`, `test`, `build`, `guidance:scan`
+- [x] Clean commit history; nothing unintended committed
 
 ## Review
 
@@ -232,6 +233,12 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-13 — T8: README rewritten (setup, scripts, features, URL scheme
+  and sharing limit, assumptions, technical choices, accessibility with
+  what was tested and known gaps, improvements, how it was built, the
+  hidden PDF instruction — owner's choices). Added `useAsync` tests.
+  GOAL boxes ticked except Accessibility. Next: owner's screen reader run.
 
 - 2026-11-13 — A–Z code review at the owner's request: removed unused type
   fields, tokens and exports, fixed two misleading comments, unified style,

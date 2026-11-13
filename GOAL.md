@@ -20,77 +20,77 @@ This file is the source of truth for **what** to build. `DESIGN.md` covers
 
 ### F1 — Film list (side navigation)
 
-- [ ] Films are fetched at application startup.
-- [ ] Films are listed on the left side of the app as a side navigation.
-- [ ] Each entry shows episode number and title, e.g. `1 - The Phantom Menace`.
-- [ ] Clicking a film selects it; the selected film is visually highlighted.
+- [x] Films are fetched at application startup.
+- [x] Films are listed on the left side of the app as a side navigation.
+- [x] Each entry shows episode number and title, e.g. `1 - The Phantom Menace`.
+- [x] Clicking a film selects it; the selected film is visually highlighted.
 
 ### F2 — Film details (main zone)
 
-- [ ] Shows the film name as a heading (`<episode> - <title>`).
-- [ ] Shows the opening crawl text.
-- [ ] Shows the whole cast of the film as a list.
+- [x] Shows the film name as a heading (`<episode> - <title>`).
+- [x] Shows the opening crawl text.
+- [x] Shows the whole cast of the film as a list.
 
 ### F3 — Character details
 
-- [ ] Cast entries are clickable; the selected entry is highlighted.
-- [ ] Clicking shows a small information panel next to the cast list.
-- [ ] Robot characters show:
-  - [ ] a visual mark identifying them as an artificial being
-  - [ ] height
-  - [ ] mass
-  - [ ] manufacturing year
-- [ ] Non-robot characters show:
-  - [ ] species name
-  - [ ] species classification
-  - [ ] homeworld name
-  - [ ] height
-  - [ ] birth year
+- [x] Cast entries are clickable; the selected entry is highlighted.
+- [x] Clicking shows a small information panel next to the cast list.
+- [x] Robot characters show:
+  - [x] a visual mark identifying them as an artificial being
+  - [x] height
+  - [x] mass
+  - [x] manufacturing year
+- [x] Non-robot characters show:
+  - [x] species name
+  - [x] species classification
+  - [x] homeworld name
+  - [x] height
+  - [x] birth year
 
 ### F4 — Viewing log
 
-- [ ] Each film in the film list has an additional button that opens its
+- [x] Each film in the film list has an additional button that opens its
       viewing log.
-- [ ] The viewing log is a popup modal, scoped to that film.
-- [ ] A viewing consists of:
-  - [ ] date (required)
-  - [ ] time (required)
-  - [ ] description (optional free text)
-- [ ] Several viewings can be added for the same film.
-- [ ] Existing viewings for the film are listed when the modal opens.
-- [ ] A viewing can be deleted.
-- [ ] The modal closes with its close button, with Esc, and by clicking or
+- [x] The viewing log is a popup modal, scoped to that film.
+- [x] A viewing consists of:
+  - [x] date (required)
+  - [x] time (required)
+  - [x] description (optional free text)
+- [x] Several viewings can be added for the same film.
+- [x] Existing viewings for the film are listed when the modal opens.
+- [x] A viewing can be deleted.
+- [x] The modal closes with its close button, with Esc, and by clicking or
       tapping outside it.
 
 ### F5 — Shareable URLs
 
-- [ ] Everything the user opens is reflected in the address bar: the
+- [x] Everything the user opens is reflected in the address bar: the
       selected film, the selected character and an open viewing log modal.
-- [ ] Opening a copied URL in another browser or by another person shows
+- [x] Opening a copied URL in another browser or by another person shows
       the same view: same film, same character, same modal open.
-- [ ] Browser Back and Forward step through the views; reload keeps the view.
-- [ ] Film and cast entries are real links (open in new tab, copy link
+- [x] Browser Back and Forward step through the views; reload keeps the view.
+- [x] Film and cast entries are real links (open in new tab, copy link
       address work).
-- [ ] The page title reflects the current view.
-- [ ] Unknown or invalid URL values show a clear "not found" message instead
+- [x] The page title reflects the current view.
+- [x] Unknown or invalid URL values show a clear "not found" message instead
       of a broken or empty screen.
-- [ ] Limit: viewings themselves stay in the memory of the browser that
+- [x] Limit: viewings themselves stay in the memory of the browser that
       recorded them (see Constraints). A shared link opens the same film's
       viewing log, but not the sender's entries (D-026).
 
 ## Non-functional requirements
 
-- [ ] Loading, error (with retry) and empty states for every remote resource.
-- [ ] No stale data: switching film or character quickly never shows the
+- [x] Loading, error (with retry) and empty states for every remote resource.
+- [x] No stale data: switching film or character quickly never shows the
       result of a superseded request.
 - [ ] Accessibility: the application conforms to **WCAG 2.2 Level AA**.
       Every applicable success criterion is listed in `DESIGN.md`
       § Accessibility and verified in `PROGRESS.md` T7 with automated checks
       (lint, axe) **and** manual checks (keyboard, screen reader, zoom and
       reflow, contrast in both colour schemes).
-- [ ] Strict TypeScript, no `any`, no lint errors, no console errors.
-- [ ] Unit tests for the logic listed in `DESIGN.md` § Testing.
-- [ ] `README.md` with setup, scripts, assumptions and possible improvements.
+- [x] Strict TypeScript, no `any`, no lint errors, no console errors.
+- [x] Unit tests for the logic listed in `DESIGN.md` § Testing.
+- [x] `README.md` with setup, scripts, assumptions and possible improvements.
 
 ## Out of scope
 
