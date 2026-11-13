@@ -285,3 +285,19 @@ Entries tagged *Assumption* must also appear in the README.
   16.81 (both).
 - Consequences: replaces D-029's blue palette; `--radius` and
   `--color-selected` tokens removed. Any new pair is checked the same way.
+
+**D-034 — OS text scale and an early connection to SWAPI** · Accepted
+- Context: T7 review with the `respect-os-text-scale` and `performance`
+  guides.
+- Decision: add `<meta name="text-scale" content="scale">`. It has limited
+  availability (Chrome/Edge 146+), so it is a progressive enhancement:
+  other browsers ignore it and keep normal zoom. The CSS never sets a root
+  font size, every size is in `rem`, and `clamp()` maximums stay ≤ 1.5×
+  their minimums (D-033). Add `<link rel="preconnect" href="https://swapi.dev"
+  crossorigin>`: the film list is requested at start-up, and `crossorigin`
+  matches the anonymous CORS connection that `fetch()` uses.
+- Consequences: no code-splitting (the bundle is 74 kB gzipped, nearly all
+  React). Security headers (CSP, HSTS, frame-ancestors) belong to whatever
+  host serves the build; there is none in scope, so they go to the Backlog.
+  The app has no dangerous DOM sinks: API text is rendered as React text.
+

@@ -136,11 +136,11 @@ Guides: search `typography`, `color`, `css-layout` before starting
 Guides: `accessibility`, `performance`, `security`, `respect-os-text-scale`
 
 Tests and robustness
-- [ ] Tests: `api/swapi` (cache, de-duplication, eviction, sorting)
+- [x] Tests: `api/swapi` (cache, de-duplication, eviction, sorting)
 - [x] Tests: `utils/character` (done in T5)
-- [ ] `App` smoke test (select film → crawl + cast; change film clears character) with `axe-core` run
-- [ ] No console errors or warnings; rapid film/character switching shows no stale data
-- [ ] `guidance:scan` reports 0 findings
+- [x] `App` smoke test (select film → crawl + cast; change film clears character) with `axe-core` run
+- [x] No console errors or warnings; rapid film/character switching shows no stale data
+- [x] `guidance:scan` reports 0 findings
 
 Shareable URLs (GOAL F5)
 - [ ] Each of these opens the same view in a new tab and in a second browser:
@@ -149,15 +149,15 @@ Shareable URLs (GOAL F5)
       duplicate or missing entries
 - [ ] Reload keeps the view; closing a deep-linked modal does not leave the app
 - [ ] Ctrl/Cmd-click and middle-click on film and cast links open a new tab
-- [ ] Invalid `film`, `character` and `log` values behave as specified
-- [ ] `App` deep-link tests pass
+- [x] Invalid `film`, `character` and `log` values behave as specified
+- [x] `App` deep-link tests pass
 
 Automated accessibility
-- [ ] `npm run lint` clean with `jsx-a11y` recommended, no disabled rules
-- [ ] Every component test has a passing `axe-core` assertion
-- [ ] Lighthouse accessibility audit or axe DevTools on the running app: 0 issues, light scheme
-- [ ] Same in dark scheme
-- [ ] Same with the modal open
+- [x] `npm run lint` clean with `jsx-a11y` recommended, no disabled rules
+- [x] Every component test has a passing `axe-core` assertion
+- [x] Lighthouse accessibility audit or axe DevTools on the running app: 0 issues, light scheme
+- [x] Same in dark scheme
+- [x] Same with the modal open
 
 Manual accessibility (record browser / assistive tech / date in the Log)
 - [ ] Keyboard only: skip link, film list, cast list, character panel, modal add / delete / close
@@ -216,6 +216,10 @@ that is the first item of T2). CLI version 1.0.0.
 
 Ideas and findings outside the current task. Not committed scope.
 
+- Security headers for a hosted build (`security` guide): hash-based CSP
+  with `connect-src https://swapi.dev`, `object-src 'none'`,
+  `base-uri 'none'`, `frame-ancestors 'none'`; HSTS. Depends on the host (D-034).
+
 - Persist the viewing log (localStorage)
 - Edit an existing viewing
 - Opening crawl animation
@@ -228,6 +232,16 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-13 — T7 (agent part): `api/swapi` tests (de-duplication, http/https
+  key, eviction on error, network error, pagination + sort). D-034: OS
+  text-scale meta and SWAPI preconnect. In Chrome 150 on the dev server:
+  axe-core 4.14 with the contrast rule on → 0 violations in light, dark,
+  modal open and form errors shown; console clean; in a 320 px iframe and
+  with the WCAG 1.4.12 text-spacing override, no horizontal scroll and
+  nothing past the edge (supporting evidence only; owner checks by hand).
+  Guides: `performance`, `security`, `respect-os-text-scale`. Next: owner's
+  manual checks, then T8.
 
 - 2026-11-13 — Owner check of T6.5: both schemes, narrow and wide, modal
   and error state OK. T6.5 done. Next: T7.

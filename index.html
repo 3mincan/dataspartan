@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
+    <!-- Follow the OS text size where supported (Chrome/Edge 146+); other
+         browsers ignore it. Root font size is never set in CSS (D-034). -->
+    <meta name="text-scale" content="scale" />
+    <!-- The film list is requested on start-up; open the connection early.
+         `crossorigin` because fetch() uses the anonymous CORS pool. -->
+    <link rel="preconnect" href="https://swapi.dev" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>Star Wars Films</title>
   </head>
