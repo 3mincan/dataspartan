@@ -83,7 +83,7 @@ This file is the source of truth for **what** to build. `DESIGN.md` covers
 - [x] Loading, error (with retry) and empty states for every remote resource.
 - [x] No stale data: switching film or character quickly never shows the
       result of a superseded request.
-- [ ] Accessibility: the application conforms to **WCAG 2.2 Level AA**.
+- [x] Accessibility: the application conforms to **WCAG 2.2 Level AA**.
       Every applicable success criterion is listed in `DESIGN.md`
       § Accessibility and verified in `PROGRESS.md` T7 with automated checks
       (lint, axe) **and** manual checks (keyboard, screen reader, zoom and

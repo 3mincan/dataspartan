@@ -128,6 +128,10 @@ Automated:
 
 In the browser (Chrome 156/157 on macOS, Safari for the modal):
 
+- Screen reader: VoiceOver + Safari through every flow — landmarks and
+  headings, selection announcements, the log button's name and count, the
+  modal title, form errors, and the add/delete status messages.
+
 - Keyboard only: skip link, film list, cast, character panel, and adding,
   deleting and closing in the modal; focus is always visible and never
   lost.
@@ -144,8 +148,7 @@ mode, and a missing focus ring on the auto-focused date field.
 
 **Known gaps:**
 
-- No run with a real screen reader yet (VoiceOver + Safari, NVDA or
-  TalkBack).
+- Only one screen reader was used (VoiceOver); no NVDA or TalkBack run.
 - Safari was checked for the modal flows only.
 - Chrome exposes CSS-uppercased text in accessible names ("FILMS",
   "CLOSE"); names still contain the visible text.

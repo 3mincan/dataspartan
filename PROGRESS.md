@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T8 — Delivery (waits on T7 screen reader runs)
-- **Next up:** owner: VoiceOver + Safari run, then tick T7, GOAL Accessibility and T8
+- **In progress:** —
+- **Next up:** — (all tasks done; optional extras in Backlog)
 - **Blocked:** —
 
 ## Tasks
@@ -162,9 +162,10 @@ Automated accessibility
 Manual accessibility (record browser / assistive tech / date in the Log)
 - [x] Keyboard only: skip link, film list, cast list, character panel, modal add / delete / close
 - [x] Focus always visible, never obscured, never lost to `<body>` (2.4.7, 2.4.11, 2.4.3)
-- [ ] Screen reader (VoiceOver + Safari): landmarks, headings, names, states, status messages,
+- [x] Screen reader (VoiceOver + Safari): landmarks, headings, names, states, status messages,
       errors, modal title announced on open
 - [ ] Second screen reader/browser pair if available (NVDA + Firefox or TalkBack + Chrome)
+      — optional; not run (see README § Known gaps)
 - [x] Contrast of every colour pair, both schemes: text ≥ 4.5:1, UI and focus ≥ 3:1 (1.4.3, 1.4.11)
 - [x] 200% zoom: nothing clipped or overlapping (1.4.4)
 - [x] 320 CSS px width: no horizontal scroll (1.4.10)
@@ -181,8 +182,7 @@ Manual accessibility (record browser / assistive tech / date in the Log)
 - [x] `README.md`: setup, scripts, tech choices, assumptions, improvements
 - [x] README: URL scheme and the viewing-data sharing limit (D-026)
 - [x] README accessibility section: WCAG 2.2 AA target, what was tested and with what, known gaps
-- [ ] All `GOAL.md` boxes ticked after verifying each in the running app
-      (all but Accessibility, which waits for the screen reader runs in T7)
+- [x] All `GOAL.md` boxes ticked after verifying each in the running app
 - [x] Final `lint`, `typecheck`, `test`, `build`, `guidance:scan`
 - [x] Clean commit history; nothing unintended committed
 
@@ -233,6 +233,12 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-13 — Owner ran VoiceOver + Safari on the dev build: landmarks and
+  headings rotor, film/character announcements, log button name and count,
+  modal title, both errors on empty submit, add/delete status messages,
+  uppercase headings — reported no issues. T7 and T8 done; GOAL complete.
+  No second screen reader pair run (optional).
 
 - 2026-11-13 — T8: README rewritten (setup, scripts, features, URL scheme
   and sharing limit, assumptions, technical choices, accessibility with
