@@ -20,8 +20,8 @@ Status legend: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked
 
 ## Current
 
-- **In progress:** T6.5 — Visual design pass
-- **Next up:** T7 — Quality pass and WCAG 2.2 AA audit
+- **In progress:** T7 — Quality pass and WCAG 2.2 AA audit
+- **Next up:** T8 — README and delivery
 - **Blocked:** —
 
 ## Tasks
@@ -130,7 +130,7 @@ Guides: search `typography`, `color`, `css-layout` before starting
       cards, emoji, stacked shadows
 - [x] CSS only, no new dependencies, through the colour tokens
 - [x] Contrast of every new colour pair computed in both schemes (update D-029)
-- [ ] Owner check: both schemes, narrow and wide, modal open
+- [x] Owner check: both schemes, narrow and wide, modal open
 
 ### T7 — Quality pass and WCAG 2.2 AA audit
 Guides: `accessibility`, `performance`, `security`, `respect-os-text-scale`
@@ -228,6 +228,9 @@ Ideas and findings outside the current task. Not committed scope.
 ## Log
 
 Newest first. One or two lines per session: what was done, what is next.
+
+- 2026-11-13 — Owner check of T6.5: both schemes, narrow and wide, modal
+  and error state OK. T6.5 done. Next: T7.
 
 - 2026-11-12 — T6.5: "Poster" restyle chosen from three mock-ups (D-033):
   yellow-on-black crawl stage, one accent, uppercase display titles,
